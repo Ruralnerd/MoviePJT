@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-75 h-100">
+  <div class="container w-50 h-75">
     <h1>Main</h1>
     <!-- interval 자동으로 슬라이드가 넘어가는 시간 -->
       <b-carousel
@@ -23,6 +23,26 @@
           :movie="movie"  
         />
     </b-carousel>
+    <!-- <div class="">
+      <button class="sidebar">zz</button>
+      <b-sidebar class="">
+        <div class="px-3 py-2">
+          <p>
+            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+          </p>
+          <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
+        </div>
+      </b-sidebar>
+    </div> -->
+    
+    <!-- <p class="test">asdasd</p> -->
+
+    <!-- <b-button @mouseover="handleHover()">이걸로 이벤트를</b-button>
+    <div v-if="isHovered" class="d-flex flex-row-reverse">
+      <p>보였다</p>
+    </div>
+    <p v-else>안보였다</p> -->
   </div>
 </template>
 
@@ -51,7 +71,7 @@ export default {
       sliding: null,
       // 모달을 위한 코드
       // modalShow: false,
-      // uid: '',
+      // isHovered: false
     }
   },
   computed: {
@@ -75,6 +95,19 @@ export default {
       this.sliding = false
       // console.log(slide)
     },
+
+    // 사이드바 호버
+    // hoverHandler(isHovered) {
+    //   if (isHovered) {
+    //     console.log('올라왔다')
+
+    //   } else {
+    //     console.log('내려왔다')
+    //   }
+    // }
+    handleHover() {
+      this.isHovered = !this.isHovered
+    }
   },
   // 데이터 가져오기
   created: function () {
@@ -82,3 +115,19 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+/* 
+  #sidebar-right {
+    display: inline;
+  } */
+
+  .test:hover {
+    color: lightcoral;
+    visibility: hidden;
+  }
+
+  .sidebar:hover {
+    visibility: visible;
+  }
+</style>

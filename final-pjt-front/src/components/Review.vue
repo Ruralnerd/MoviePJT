@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h1>Sign up page</h1>
+    <h1>리뷰 페이지에요</h1>
+    <p>asdasds</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Signup'
+  name: 'Review',
 }
 </script>
 

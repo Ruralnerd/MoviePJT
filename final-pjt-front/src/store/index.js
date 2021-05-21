@@ -7,15 +7,23 @@ export default new Vuex.Store({
   state: {
     mymovies:[],
     removies:[],
+    savemovies:[1],
   },
   mutations: {
     SAVE_MOVIE: function(state, movie) {
       state.mymovies.push(movie)
     },
+    SAVE_ID: function(state, movie) {
+      state.savemovies.unshift(movie)
+      state.savemovies.pop()
+    },
   },
   actions: {
     saveMovie: function({ commit }, movie) {
       commit('SAVE_MOVIE', movie)
+    },
+    saveId: function({ commit }, movie) {
+      commit('SAVE_ID', movie)
     },
   },
   getter: {
@@ -23,9 +31,7 @@ export default new Vuex.Store({
       if (state.mymovies.vote_average > 9) {
         state.removies.push(state.mymovies)
       }
-
     }
-    
   },
   modules: {
   }

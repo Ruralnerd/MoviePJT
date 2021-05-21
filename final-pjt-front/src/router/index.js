@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Main from '../views/Main.vue'
-import Recommended from '../views/Recommended.vue'
-import Signin from '../views/Signin.vue'
-import Signout from '../views/Signout.vue'
-import Signup from '../views/Signup.vue'
-import MyMovieList from '../views/MyMovieList.vue'
+import Main from '../views/movies/Main.vue'
+import Recommended from '../views/movies/Recommended.vue'
+import MyMovieList from '../views/movies/MyMovieList.vue'
+
+import Community from '../views/community/Community.vue'
+
+import ArticleForm from '../views/community/ArticleForm.vue'
+
+import Signin from '../views/accounts/Signin.vue'
+import Signout from '../views/accounts/Signout.vue'
+import Signup from '../views/accounts/Signup.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +26,21 @@ const routes = [
     component: Recommended
   },
   {
+    path: '/mymovielist',
+    name: 'MyMovieList',
+    component: MyMovieList
+  },
+  {
+    path: '/community',
+    name: 'Community',
+    component: Community
+  },
+  {
+    path: '/articleform',
+    name: 'ArticleForm',
+    component: ArticleForm
+  },
+  {
     path: '/signin',
     name: 'Signin',
     component: Signin
@@ -34,11 +54,6 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup
-  },
-  {
-    path: '/mymovielist',
-    name: 'MyMovieList',
-    component: MyMovieList
   },
 ]
 
