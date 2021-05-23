@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import Review from '@/components/Review.vue'
+import Review from '@/components/movies/Review.vue'
 
 export default {
-  name: 'MyList',
+  name: 'MyMovie',
   components: {
     Review
   },

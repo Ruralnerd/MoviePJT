@@ -2,7 +2,7 @@
   <div class="container">
     <b-carousel-slide>
       <template #img>
-        <img class="" :src="'https://image.tmdb.org/t/p/w300/'+ movie.poster_path" width="600" height="700" @click="[saveId(), modalShow=!modalShow]">
+        <img class="" :src="'https://image.tmdb.org/t/p/w300/'+ movie.poster_path" width="500" height="700" @click="[saveId(), modalShow=!modalShow]">
       </template>
       <h1>{{ movie.title }}</h1>
       <b-button @click="saveMovie" class="btn btn-primary">☆</b-button>
@@ -26,7 +26,7 @@
 
 <script>
 // import MovieDetail from '@/components/MovieDetail.vue'
-import Review from '@/components/Review.vue'
+import Review from '@/components/movies/Review.vue'
 
 export default {
   name: 'MovieCard',

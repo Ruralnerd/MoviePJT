@@ -6,7 +6,9 @@ import MyMovieList from '../views/movies/MyMovieList.vue'
 
 import Community from '../views/community/Community.vue'
 
-import ArticleForm from '../views/community/ArticleForm.vue'
+
+import Article from '../components/community/Article.vue'
+import ArticleForm from '../components/community/ArticleForm.vue'
 
 import Signin from '../views/accounts/Signin.vue'
 import Signout from '../views/accounts/Signout.vue'
@@ -34,6 +36,11 @@ const routes = [
     path: '/community',
     name: 'Community',
     component: Community
+  },
+  {
+    path: '/article',
+    name: 'Article',
+    component: Article
   },
   {
     path: '/articleform',

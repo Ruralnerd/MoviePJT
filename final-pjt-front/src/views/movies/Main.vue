@@ -48,7 +48,7 @@
 
 <script>
 import axios from 'axios'
-import MovieCard from '@/components/MovieCard.vue'
+import MovieCard from '@/components/movies/MovieCard.vue'
 // import MovieDetail from '@/components/MovieDetail.vue'
 // import ModalView from '@/components/ModalView.vue'
 // import { Glide, GlideSlide } from 'vue-glide-js'
@@ -80,7 +80,8 @@ export default {
   methods: {
     // 영화 정보를 가져온다
     getMovies () {
-      axios.get("https://gist.githubusercontent.com/Ruralnerd/ada51601c3706cf1fe3dc6fe46bd403f/raw/bc9dd8ea781942b31e4380f394a321bee65a1949/movietest.json")
+      // axios.get("https://gist.githubusercontent.com/Ruralnerd/ada51601c3706cf1fe3dc6fe46bd403f/raw/bc9dd8ea781942b31e4380f394a321bee65a1949/movietest.json")
+      axios.get("https://gist.githubusercontent.com/Ruralnerd/ada51601c3706cf1fe3dc6fe46bd403f/raw/eb3b441c45929b08819713ee6103fe7ad2843d53/movielist.json")
       .then((response) => {
         this.movies=response.data
       })
@@ -130,4 +131,8 @@ export default {
   .sidebar:hover {
     visibility: visible;
   }
+  
+  /* .container {
+    background-color: red;
+  } */
 </style>

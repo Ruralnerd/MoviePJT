@@ -1,17 +1,17 @@
 <template>
   <div>
     <h1>MyMovieList</h1>
-    <MyList v-for="(mymovie, idx) in mymovies" :key="idx" :mymovie="mymovie"/>
+    <MyMovie v-for="(mymovie, idx) in mymovies" :key="idx" :mymovie="mymovie"/>
   </div>
 </template>
 
 <script>
-import MyList from '@/components/MyList.vue'
+import MyMovie from '@/components/movies/MyMovie.vue'
 
 export default {
   name: "MyMovieList",
   components: {
-    MyList
+    MyMovie
   },
   computed: {
     mymovies: function () {

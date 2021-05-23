@@ -6,21 +6,28 @@
     <ul>
       <!-- 가져온 데이터(articles)를 반복문을 통해 보여주자 -->
       <!-- django model과 합을 맞춰야 할 것 같다. -->
-      <li v-for="(article, idx) in articles" :key="idx" >
-        <p>{{ article.title }}</p> <!-- 제목 -->
-        <p>{{ article.created_at }}</p> <!-- 작성시간 -->
-        <p>{{ article.user }}</p> <!-- 작성자 -->
+      <Article
+        v-for="(article, idx) in articles"
+        :key="idx"
+        :article="article"
+      />
+        <!-- <p>{{ article.title }}</p> 제목 -->
+        <!-- <p>{{ article.created_at }}</p> 작성시간 -->
+        <!-- <p>{{ article.user }}</p> 작성자 -->
         <!-- 각 글에 답글이 몇개씩 달렸는지도 해볼까? -->
-      </li>
     </ul>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import Article from '@/components/community/Article.vue'
 
 export default {
   name: 'Community',
+  components: {
+    Article
+  },
   data: function () {
     return {
       articles: null,
@@ -29,16 +36,16 @@ export default {
   methods: {
     getArticles: function () {
 
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/community/',
-      })
-        .then((response) => {
-          this.articles = response.data
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      // axios({
+      //   method: 'get',
+      //   url: 'http://127.0.0.1:8000/community/',
+      // })
+      //   .then((response) => {
+      //     this.articles = response.data
+      //   })
+      //   .catch((error) => {
+      //     console.log(error)
+      //   })
 
     }
   },
