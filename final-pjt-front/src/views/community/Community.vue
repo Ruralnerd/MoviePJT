@@ -20,7 +20,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 import Article from '@/components/community/Article.vue'
 
 export default {
@@ -34,18 +34,25 @@ export default {
     }
   },
   methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
     getArticles: function () {
-
-      // axios({
-      //   method: 'get',
-      //   url: 'http://127.0.0.1:8000/community/',
-      // })
-      //   .then((response) => {
-      //     this.articles = response.data
-      //   })
-      //   .catch((error) => {
-      //     console.log(error)
-      //   })
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/community/',
+        headers: this.setToken()
+      })
+        .then((response) => {
+          this.articles = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
 
     }
   },
