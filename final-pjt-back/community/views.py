@@ -47,6 +47,8 @@ def review_detail(request, review_pk):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def comments_list(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == "GET":

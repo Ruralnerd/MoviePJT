@@ -48,7 +48,8 @@ export default {
       })
         .then(response => {
           console.log(response)
-          console.log(this.credentials)
+          // console.log(this.credentials)
+          this.$router.push({ name: 'Signin' })
         })
         .catch(error => {
           console.log(error)

@@ -11,10 +11,10 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ReviewListSerializer(serializers.ModelSerializer):
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
-    
+
     class Meta:
         model = Review
-        fields = ('id', 'title', 'comment_count')
+        fields = ('id', 'title', 'created_at', 'movie_title', 'content', 'comment_count')
 
 
 class ReviewSerializer(serializers.ModelSerializer):

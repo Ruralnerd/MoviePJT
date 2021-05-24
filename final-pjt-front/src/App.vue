@@ -5,11 +5,9 @@
         <b-navbar type="light" variant="dark">
           <b-navbar-nav>
             <router-link :to="{ name: 'Main' }" class="text-decoration-none p-2">Main</router-link>
-            <router-link :to="{ name: 'Recommended' }" class="text-decoration-none p-2">Recommended</router-link>
-            <!-- <router-link :to="{ name: 'Signup' }">Sign up</router-link> -->
-            <!-- <router-link :to="{ name: 'Signin' }">Sign in</router-link> -->
-            <!-- <router-link :to="{ name: 'Signout' }">Sign out</router-link> -->
-            <router-link :to="{ name: 'MyMovieList' }" class="text-decoration-none p-2">My Movie List</router-link>
+            <router-link v-if="isSignin" :to="{ name: 'Recommended' }" class="text-decoration-none p-2">Recommended</router-link>
+            <router-link v-if="isSignin" :to="{ name: 'MyMovieList' }" class="text-decoration-none p-2">My Movie List</router-link>
+            <router-link v-if="isSignin" :to="{ name: 'MovieAdd' }" class="text-decoration-none p-2">Movie Add</router-link>
             <router-link :to="{ name: 'Community' }" class="text-decoration-none p-2">Community</router-link>
           </b-navbar-nav>
 
@@ -23,14 +21,16 @@
               <template #button-content>
                 <span class="p-2">User</span>
               </template>
-              <b-dropdown-item><router-link :to="{ name: 'Signup' }" class="text-decoration-none">Sign up</router-link></b-dropdown-item>
-              <b-dropdown-item><router-link :to="{ name: 'Signin' }" class="text-decoration-none">Sign in</router-link></b-dropdown-item>
-              <b-dropdown-item><router-link :to="{ name: 'Signout' }" class="text-decoration-none" @click.native="signout">Sign out</router-link></b-dropdown-item>
+              <span v-if="isSignin"><b-dropdown-item><router-link :to="{ name: 'Signout' }" class="text-decoration-none" @click.native="signout">Sign out</router-link></b-dropdown-item></span>
+              <span v-else>
+                <b-dropdown-item><router-link :to="{ name: 'Signup' }" class="text-decoration-none">Sign up</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link :to="{ name: 'Signin' }" class="text-decoration-none">Sign in</router-link></b-dropdown-item>
+              </span>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-navbar>
       </div>
-      <router-view @login="isSignin=true"/>
+      <router-view @signin="isSignin=true"/>
     </div>
   </div>
 </template>
@@ -67,6 +67,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-left: 200px;
+  /* margin-right: 200px; */
 }
 
 #nav {
@@ -85,7 +87,7 @@ export default {
 }
 .zz {
   background-color: black;
-  background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FudBi1%2FbtqDTjGXEpp%2FNgyg3Mjks6TNIKvK8kTLa0%2Fimg.jpg");
+  /* background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FudBi1%2FbtqDTjGXEpp%2FNgyg3Mjks6TNIKvK8kTLa0%2Fimg.jpg"); */
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;

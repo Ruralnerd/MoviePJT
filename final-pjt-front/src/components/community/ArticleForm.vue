@@ -2,24 +2,17 @@
   <div>
     <h1>글쓰는 곳임</h1>
     <div class="container col-sm-4">
-      <!-- 제목 -->
-      제목 :
-      <b-form-textarea
-        id="textarea-rows"
-        v-model="title"
-        placeholder="제목을 입력해주세요."
-        rows="1"
-      ></b-form-textarea>
+      <div class="p-1">
+        <textarea class="form-control" placeholder="제목" id="floatingTitle" v-model="title" style="height:15px"></textarea>
+        <!-- <label for="floatingTextarea">제목</label> -->
+      </div>   
+      <div class="p-1">
+        <textarea class="form-control" placeholder="영화 제목" id="floatingMovieTitle" v-model="movie_title" style="height:15px"></textarea>
+      </div>
       <!-- 얘는 본문임 -->
-      <hr>
-      <b-form-textarea
-        id="textarea-rows"
-        v-model="content"
-        placeholder=""
-        rows="2"
-        class=""
-      ></b-form-textarea>
-      <hr>
+      <div class="p-1">
+        <textarea class="form-control" placeholder="본문" id="floatingContent" v-model="content" style=""></textarea>
+      </div>
       <b-button @click="createArticle">작성</b-button>
     </div>
   </div>
@@ -32,8 +25,9 @@ export default {
   name: 'ArticleForm',
   data: function () {
     return {
-      title: null,
-      content: null,
+      title: '',
+      movie_title: '',
+      content: '',
     }
   },
   methods: {
@@ -48,9 +42,10 @@ export default {
     createArticle: function() {
       const Article = {
         title: this.title,
-        content: this.content
+        content: this.content,
+        movie_title: this.movie_title
       }
-
+      console.log(Article)
       // 값이 있다면
       if (Article.title) {
         axios({
@@ -65,12 +60,10 @@ export default {
             this.$router.push({ name: 'Community' })
           })
           .catch((error) => {
-              console.log(error)
+            console.log(error)
           })
       }
-        // console.log(Article)
-        // this.$router.push({ name: 'Community' })
-    }
+    },
   }
 }
 </script>

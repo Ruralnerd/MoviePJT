@@ -13,19 +13,19 @@
           <p>평점 {{ savemovies[0].vote_average }}</p>
           <p>상영시간 {{ savemovies[0].runtime }}분</p>
         </div>
-        <Review/>
+        <ReviewList/>
       </div>
     </b-modal>
   </div>
 </template>
 
 <script>
-import Review from '@/components/movies/Review.vue'
+import ReviewList from '@/components/movies/ReviewList.vue'
 
 export default {
   name: 'MyMovie',
   components: {
-    Review
+    ReviewList
   },
   data() {
     return {

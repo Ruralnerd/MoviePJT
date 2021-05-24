@@ -16,6 +16,11 @@ export default {
       type: Object,
     },
   },
+  methods: {
+    check: function () {
+      console.log(this.comment)
+    }
+  }
 }
 </script>
 

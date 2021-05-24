@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Main from '../views/movies/Main.vue'
 import Recommended from '../views/movies/Recommended.vue'
 import MyMovieList from '../views/movies/MyMovieList.vue'
+import MovieAdd from '../views/movies/MovieAdd.vue'
 
 import Community from '../views/community/Community.vue'
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/mymovielist',
     name: 'MyMovieList',
     component: MyMovieList
+  },
+  {
+    path: '/movieadd',
+    name: 'MovieAdd',
+    component: MovieAdd
   },
   {
     path: '/community',

@@ -1,22 +1,19 @@
 <template>
   <div class="container">
-    <b-carousel-slide>
-      <template #img>
-        <img class="" :src="'https://image.tmdb.org/t/p/w300/'+ movie.poster_path" width="500" height="700" @click="[saveId(), modalShow=!modalShow]">
-      </template>
-      <h1>{{ movie.title }}</h1>
-      <b-button @click="saveMovie" class="btn btn-primary">☆</b-button>
-    </b-carousel-slide>
+      <div class="carousel-item p-0">
+        <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid" style="height:700px; width:500px" alt="..." @click="[saveId(), modalShow=!modalShow]">
+        <!-- <p>{{ movie.title }}</p> -->
+      </div>
     <!-- <b-button @click="[modalShow=!modalShow, saveId()]">이거임</b-button> -->
     <b-modal id="modal-xl" size="xl" v-model="modalShow" :title=savemovies[0].title class="">
       <div class="d-flex">
-        <img :src="'https://image.tmdb.org/t/p/w300/'+ savemovies[0].poster_path" alt="">
+        <img :src="'https://image.tmdb.org/t/p/w500/'+ savemovies[0].poster_path" alt="">
         <div class="w-25 d-flex flex-column p-3">
           <p> 개봉일 {{ savemovies[0].release_date }}</p>
           <p> 평점 {{ savemovies[0].vote_average }}</p>
           <p> 상영시간 {{ savemovies[0].runtime }}분</p>
         </div>
-        <Review/>
+        <ReviewList/>
       </div>
     </b-modal>
   </div>
@@ -25,13 +22,13 @@
 
 <script>
 // import MovieDetail from '@/components/MovieDetail.vue'
-import Review from '@/components/movies/Review.vue'
+import ReviewList from '@/components/movies/ReviewList.vue'
 
 export default {
   name: 'MovieCard',
   components: {
     // MovieDetail,
-    Review
+    ReviewList
   },
   data() {
     return {
@@ -94,4 +91,6 @@ export default {
   .modal-footer {
     background-color: black;
   }
+
+
 </style>
