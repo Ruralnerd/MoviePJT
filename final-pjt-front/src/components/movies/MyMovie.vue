@@ -5,7 +5,7 @@
     <!-- <h1><router-link :to="mymovie.id">{{ mymovie.title }}</router-link></h1> -->
     <h2 @click="[saveId(), modalShow=!modalShow]">{{ mymovie.title }}</h2>
     <!-- <button @click="[saveId(), modalShow=!modalShow]">눌러봥</button> -->
-    <b-modal id="modal-lg" size="lg" v-model="modalShow">
+    <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=savemovies[0].title class="mt-3">
       <div class="d-flex">
         <img :src="'https://image.tmdb.org/t/p/w300/'+ savemovies[0].poster_path" alt="">
         <div class="w-25">

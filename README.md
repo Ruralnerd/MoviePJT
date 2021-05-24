@@ -100,3 +100,7 @@ npm i --save @fortawesome/free-regular-svg-icons
 
 
 뷰 트랜지션
+
+
+
+영화 정보를 가져와서 state에 담고, created가 한번 된 이후에는 다시 메서드를 실행시키지 마라.

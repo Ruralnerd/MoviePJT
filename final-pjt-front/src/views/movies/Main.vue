@@ -80,11 +80,14 @@ export default {
   methods: {
     // 영화 정보를 가져온다
     getMovies () {
-      // axios.get("https://gist.githubusercontent.com/Ruralnerd/ada51601c3706cf1fe3dc6fe46bd403f/raw/bc9dd8ea781942b31e4380f394a321bee65a1949/movietest.json")
-      axios.get("https://gist.githubusercontent.com/Ruralnerd/ada51601c3706cf1fe3dc6fe46bd403f/raw/eb3b441c45929b08819713ee6103fe7ad2843d53/movielist.json")
-      .then((response) => {
-        this.movies=response.data
+      if (this.movies.length === 0) {
+        axios.get("https://gist.githubusercontent.com/Ruralnerd/ada51601c3706cf1fe3dc6fe46bd403f/raw/eb3b441c45929b08819713ee6103fe7ad2843d53/movielist.json")
+        .then((response) => {
+          this.movies=response.data
       })
+      } else {
+        console.log(this.movies)
+      }
     },
     // 캐러솔 슬라이드 start, end
     onSlideStart() {
@@ -112,7 +115,11 @@ export default {
   },
   // 데이터 가져오기
   created: function () {
+    if (this.movies.length === 0) {
     this.getMovies()
+    } else {
+      console.log(this.movies)
+    }
   },
 }
 </script>

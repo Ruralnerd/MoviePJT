@@ -44,7 +44,7 @@ export default {
     getArticles: function () {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/community/',
+        url: 'http://127.0.0.1:8000/api/community/review/',
         headers: this.setToken()
       })
         .then((response) => {
@@ -58,7 +58,11 @@ export default {
   },
   // 페이지가 열리자마자 글을 가져오게하자
   created: function () {
+    // if (localStorage.getItem('jwt')) {
     this.getArticles()
+    // } else {
+      // this.$router.push({name: 'Login'})
+    // }
   }
 }
 </script>

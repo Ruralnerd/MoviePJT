@@ -8,11 +8,15 @@ import Community from '../views/community/Community.vue'
 
 
 import Article from '../components/community/Article.vue'
+import ArticleDetail from '../components/community/ArticleDetail.vue'
+
 import ArticleForm from '../components/community/ArticleForm.vue'
 
 import Signin from '../views/accounts/Signin.vue'
 import Signout from '../views/accounts/Signout.vue'
 import Signup from '../views/accounts/Signup.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -41,6 +45,12 @@ const routes = [
     path: '/article',
     name: 'Article',
     component: Article
+  },
+  {
+    path: '/articledetail/:id',
+    name: 'ArticleDetail',
+    component: ArticleDetail,
+    props: true
   },
   {
     path: '/articleform',

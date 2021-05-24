@@ -1,17 +1,15 @@
 <template>
   <div>
-    <h1>Comment</h1>
-    <CommentForm/>
+    <p>{{ comment.content }}</p>
   </div>
 </template>
 
 <script>
-import CommentForm from '@/components/community/CommentForm.vue'
+
 
 export default {
   name: 'Comment',
   components: {
-    CommentForm
   },
   props: {
     comment: {

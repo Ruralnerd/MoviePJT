@@ -1,6 +1,6 @@
 <template>
   <div class="zz">
-    <div id="app">
+    <div id="app" class="container">
       <div id="nav">
         <b-navbar type="light" variant="dark">
           <b-navbar-nav>
@@ -23,19 +23,42 @@
               <template #button-content>
                 <span class="p-2">User</span>
               </template>
-              <!-- <b-dropdown-item href="#">Profile</b-dropdown-item> -->
-              <b-dropdown-item href="#"><router-link :to="{ name: 'Signup' }" class="text-decoration-none">Sign up</router-link></b-dropdown-item>
-              <b-dropdown-item href="#"><router-link :to="{ name: 'Signin' }" class="text-decoration-none">Sign in</router-link></b-dropdown-item>
-              <b-dropdown-item href="#"><router-link :to="{ name: 'Signout' }" class="text-decoration-none">Sign out</router-link></b-dropdown-item>
+              <b-dropdown-item><router-link :to="{ name: 'Signup' }" class="text-decoration-none">Sign up</router-link></b-dropdown-item>
+              <b-dropdown-item><router-link :to="{ name: 'Signin' }" class="text-decoration-none">Sign in</router-link></b-dropdown-item>
+              <b-dropdown-item><router-link :to="{ name: 'Signout' }" class="text-decoration-none" @click.native="signout">Sign out</router-link></b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-navbar>
       </div>
-      <router-view/>
+      <router-view @login="isSignin=true"/>
     </div>
   </div>
 </template>
 
+
+<script>
+export default {
+  name: 'App',
+  data: function () {
+    return {
+      isSignin: false,
+    }
+  },
+  methods: {
+    signout: function () {
+      this.isSignin = false
+      localStorage.removeItem('jwt')
+      this.$router.push({ name: 'Signin' })
+    }
+  },
+  created: function () {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      this.isSignin = true
+    }
+  }
+}
+</script>
 
 <style>
 #app {
@@ -52,16 +75,19 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  /* color: #2c3e50; */
+  color: darksalmon;
+  
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-/* * {
-  text-decoration: none;
-} */
-router-link {
-  text-decoration: none;
+.zz {
+  background-color: black;
+  background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FudBi1%2FbtqDTjGXEpp%2FNgyg3Mjks6TNIKvK8kTLa0%2Fimg.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 </style>

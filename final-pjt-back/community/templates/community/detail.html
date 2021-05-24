@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Community Detail Page</h1>
+  <!-- 리뷰 수정하기 -->
+  {% if request.user == review.user %}
+    <a href="{% url "community:review_update" review.pk %}">[update]</a>
+  <!-- 리뷰 삭제하기 -->
+    <form action="{% url "community:review_delete" review.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="DELETE">
+    </form>
+  {% endif %}
+  <!-- 리뷰 정보 띄우기 -->
+  <h3>영화 : {{review.movie_title}}</h3>
+  <br>
+  <p>영화제목 : {{review.title}}</p>
+  <p>내용 : {{review.content}}</p>
+  <p>작성 시각 : {{review.created_at}}</p>
+  <p>수정 시각 : {{review.updated_at}}</p>
+  <br>
+  <!-- 댓글 목록 -->
+  <p>댓글 수 : {{comments|length}}개</p>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        <p>댓글 : {{comment.content}}</p>
+        <p>{{comment.user}} | {{comment.created_at}} | {{comment.updated_at}}</p>
+        <!-- 댓글 삭제 -->
+        {% if comment.user == request.user %}
+          <form action="{% url "community:comments_delete" review.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+          <input type="submit" value="DELETE">
+        {% endif %}
+  </form>
+      </li>
+    {% endfor %}
+  </ul>
+  <!-- 댓글 작성 -->
+  <form action="{% url "community:comments_create" review.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit">
+  </form>
+
+  <hr>
+{% endblock  %}

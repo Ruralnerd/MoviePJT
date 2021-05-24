@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1> MOVIE DETAIL PAGE</h1>
+  <h3>movie title : {{movie.title}}</h3>
+  <p>movie overview : {{movie.overview}}</p>
+  <hr>
+  <!-- 평점 목록 -->
+  <h4>평점 목록</h4>
+  <p>{{ rates|length }}개의 평점이 있습니다.</p>
+   <ul>
+    {% for rate in rates %}
+      <li>
+        {{rate.star}} : {{ rate.user }} - {{ rate.opinion }}
+        <!-- 평점 수정 -->
+        {% comment %} {% if request.user == rate.user %}
+          <form action="{% url 'movies:rates_update' moive.pk rate.pk %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+          <input type="submit" value="UPDATE">
+          </form>
+        {% endif %} {% endcomment %}
+        <!-- 평점 삭제 -->
+        {% if request.user == rate.user %}
+          <form action="{% url 'movies:rates_delete' movie.pk rate.pk %}" method="POST">
+            {% csrf_token %}
+          <input type="submit" value="DELETE">
+          </form>
+        {% endif %}
+      </li>
+    {% empty %}
+      <p>댓글을 작성해보세요.</p>
+    {% endfor %}
+  </ul>
+  <hr>
+  <!-- 댓글 등록 -->
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'movies:rates_create' movie.pk %}" method="POST">
+      {% csrf_token %}
+      {{ rate_form }}
+      <input type="submit">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인 하세요.]</a>
+  {% endif %}
+  <hr>
+  {% comment %} <form action="" method="POST">
+    {% csrf_token %}
+    {% form %}
+    <input type="submit">
+  </form>
+  <hr> {% endcomment %}
+{% endblock %}

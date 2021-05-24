@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% comment %} {% load bootstrap5 %} {% endcomment %}
+
+{% block content %}
+  <h1>MOVIES INDEX PAGE</h1>
+  <hr>
+  {% for movie in movies %}
+    <h2>{{movie.title}}</h2>
+    <a href="{% url "movies:movie_detail" movie.pk %}">[detail]</a>
+    <hr>
+  {% endfor %}
+{% endblock content %}
