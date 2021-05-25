@@ -1,10 +1,8 @@
+from movies.serializers import MovieSerializer
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Q
-
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
 from .models import Movie, Rate, Genre
 from .serializers import GenreSerializer, MovieSerializer, RateSerializer
 
@@ -17,24 +15,8 @@ def movie_index(request):
     return render(request, 'movies/index.html', context)
 
 def movie_recommend(request):
-    genres = {28:"액션", 12:"모험", 16:"애니메이션", 35:"코미디", 80:"범죄", 99:"다큐멘터리", 18:"드라마", 10751:"가족", 14:"판타지", 36:"역사", 27:"공포", 10402:"음악", 9648:"미스터리", , 10749:"로맨스", 878:"SF", 10770:"TV영화", 53:"스릴러", 10752:"전쟁", 37:"서부"}
-    # 최신 영화 100개
-    latest_movie = Movie.objects.order_by('-release_date')[:100]
-    # 인기 영화 100개
-    popular_movie = Movie.objects.order_by('popularity')[:100]
-    # runtime 120분 이상, 최신순 
-    runtime_movie = Movie.objects.filter(runtime__gte=120).order_by('-release_date')
-    # 추천 영화 : vote_count >= 15000, vote_average >= 8.0, 평점 순
-    today_movie = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('vote_average')
-
-    context = {
-        'latest_movie':latest_movie,
-        'popular_movie':popular_movie,
-        'runtime_movie':runtime_movie,
-        'today_movie':today_movie,
-    }
-    return render(request, 'movies/recommend.html', context)
-
+    pass
+    
 
 
 
@@ -108,13 +90,8 @@ def rates_detail(request, rate_pk):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 def search(request):
-    word = request.GET.get('word','') # GET request의 인자 중에 word값이 있으면 가져오고, 없으면 빈 문자열 넣기
+    words = Movie.objects.all() # 영화 정보 불러오기
+    word = request.GET.get('word','') # GET request의 인자 중에 word갑싱 있으면 가져오고, 없으면 빈 문자열 넣기
     if word: # word 값이 있으면
-        movies = Movie.objects.filter(Q(title__contains=word) | Q(original_title__contains=word))
-    else:
-        movies = '일치하는 검색 결과가 없습니다.'
-    context = {
-        'word': word,
-        'movies': movie,
-    }
-    return render(request, 'movies/search.html', context)
+        words = words.filter(title__contains=word)
+    return render(request, 'movies/search.html', {'search':words, 'word':word})

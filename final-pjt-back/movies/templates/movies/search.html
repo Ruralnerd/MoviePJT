@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    <title>Search</title>
+{% endblock %}
+
+{% block container %}
+<center><h1>border</h1></center>
+<div class="bordertable">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">id</th>
+            <th scope="col">title</th>
+            {% comment %} <th scope="col">author</th>
+            <th scope="col">text</th>
+            <th scope="col">photo</th> {% endcomment %}
+        </tr>
+    </thead>
+        {% for post in search %}
+            <tr>
+                <th scope="row"></th>
+                <td>{{forloop.counter }}</td>
+                <td><a href="">{{post.title}}</a></td>
+                {% comment %} <td>{{post.author}}</td>
+                <td>{{post.text}}</td>
+                <td>{{post.photo}}</td>
+                <td>{{post.number}}</td> {% endcomment %}
+                {{post.b}}
+            </tr>
+    {% endfor %}
+
+        <h1>당신이 입력한 검색어는 {{word.title}}</h1>
+
+    </tbody>
+</table>
+</div>
+{% endblock %}

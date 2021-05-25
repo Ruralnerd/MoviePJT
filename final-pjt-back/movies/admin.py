@@ -6,7 +6,6 @@ class MovieAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'title',
-        'original_title',
         'release_date'
     )
     list_display_links = (

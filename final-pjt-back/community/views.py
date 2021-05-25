@@ -90,7 +90,7 @@ def comments_detail(request, comment_pk):
                 comment.delete()
                 data = {
                     'id': comment_pk,
-                    'delete': f'{comment_pk}번 댓글이 삭제되었습니다.'
+                    'delete': f'{comment_pk}번 평점이 삭제되었습니다.'
                 }
                 return Response(data, status=status.HTTP_204_NO_CONTENT)
         else:
