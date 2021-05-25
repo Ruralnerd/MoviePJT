@@ -16,6 +16,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+// vue-lodash 사용하기 위한 코드 1
+import VueLodash from 'vue-lodash'
+import lodash from 'lodash'
+
 
 // bootstrap을 사용하기 위한 코드2
 Vue.use(BootstrapVue)
@@ -26,6 +30,9 @@ Vue.use(VueGlide)
 // font-awesome을 사용하기 위한 코드
 library.add(faUserSecret)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+// vue-lodash 사용하기 위한 코드 1
+Vue.use(VueLodash, { name: 'custom' , lodash: lodash })
 
 Vue.config.productionTip = false
 

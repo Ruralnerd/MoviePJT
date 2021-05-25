@@ -1,19 +1,23 @@
 <template>
   <div>
-    <h1>글쓰는 곳임</h1>
-    <div class="container col-sm-4">
+    <div class="container col-sm-6">
       <div class="p-1">
         <textarea class="form-control" placeholder="제목" id="floatingTitle" v-model="title" style="height:15px"></textarea>
         <!-- <label for="floatingTextarea">제목</label> -->
+        <br>
       </div>   
       <div class="p-1">
         <textarea class="form-control" placeholder="영화 제목" id="floatingMovieTitle" v-model="movie_title" style="height:15px"></textarea>
+        <br>
       </div>
       <!-- 얘는 본문임 -->
       <div class="p-1">
         <textarea class="form-control" placeholder="본문" id="floatingContent" v-model="content" style=""></textarea>
       </div>
-      <b-button @click="createArticle">작성</b-button>
+      <br>
+      <div class="d-flex flex-row-reverse">
+        <b-button @click="createArticle" class="">작성</b-button>
+      </div>
     </div>
   </div>
 </template>

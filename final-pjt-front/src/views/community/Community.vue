@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container" style="width:600px">
     <h1>커뮤니티 페이지</h1>
     <table class="table table-dark table-hover">
       <thead>

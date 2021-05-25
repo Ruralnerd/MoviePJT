@@ -1,13 +1,15 @@
 <template>
-  <div class="container d-flex" style="">
-    <div class="justify-content-start">
-      <p class="bg-danger">제목 : {{ detail.title }}</p>
-      <p>영화 : {{ detail.movie_title }}</p>
-      <p>본문 : {{ detail.content }}</p>
-      <button type="button" class="btn btn-primary" @click="goUpdate">수정</button>
-      <button type="button" class="btn btn-danger" @click="deleteDetail">삭제</button>
+  <div class="container col-sm-6" style="">
+    <div class="d-flex flex-column justify-content-start">
+      <p class="bg-danger text-start">제목 : {{ detail.title }}</p>
+      <p class="text-start">영화 : {{ detail.movie_title }}</p>
+      <p class="text-start">본문 : {{ detail.content }}</p>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" @click="goUpdate">수정</button>
+        <button type="button" class="btn btn-danger ms-1" @click="deleteDetail">삭제</button>
+      </div>
       <hr>
-      <p>댓글</p>
+      <p class="text-start">댓글</p>
       <Comment
         v-for="(comment, idx) in comments"
         :key="idx"
