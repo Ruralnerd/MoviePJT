@@ -25,17 +25,20 @@ export default {
   name: 'ArticleUpdateForm',
   data: function () {
     return {
-      title: this.$route.query.title,
-      movie_title: this.$route.query.movie_title,
-      content: this.$route.query.content,
-      id: this.$route.query.id,
+      title: '',
+      movie_title: '',
+      content: '',
+      // title: this.$route.query.title,
+      // movie_title: this.$route.query.movie_title,
+      // content: this.$route.query.content,
+      // id: this.$route.query.id,
     }
   },
-  mounted: function () {
-    if(this.query) {
-      this.getDetail()
-    }
-  },
+  // mounted: function () {
+  //   if(this.query) {
+  //     this.getDetail()
+  //   }
+  // },
   methods: {
     setToken: function () {
       const token = localStorage.getItem('jwt')
@@ -49,10 +52,16 @@ export default {
     },
     // 장고로 신호 쏴줘야해 ..
     updateDetail: function () {
+      const Article = {
+        title: this.title,
+        content: this.content,
+        movie_title: this.movie_title,
+      }
+
       axios({
         method: 'put',
-        url: ``,
-        data:'',
+        url: `http://127.0.0.1:8000/community/review/${this.id}/`,
+        data:Article,
         headers: this.setToken(),
       })
         .then((response) => {

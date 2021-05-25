@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <h1>review page</h1>
+  {% for review in reviews %}
+    <p>{{review.title}}</p>
+    <p>{{review.created_at}}</p>
+    <p>{{review.updated_at}}</p>
+  {% endfor %}
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
   <!-- review 작성 -->
   {% if user.is_authenticated %}
     <a href="{% url 'community:review_create' %}">NEW</a>
@@ -15,4 +26,4 @@
     <a href="{% url 'community:review_detail' review.pk %}">[DETAIL]</a>
     <hr>
   {% endfor %}
-{% endblock %}
+{% endblock %} {% endcomment %}

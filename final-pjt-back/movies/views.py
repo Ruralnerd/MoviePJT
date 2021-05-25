@@ -5,6 +5,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Movie, Rate, Genre
 from .serializers import GenreSerializer, MovieSerializer, RateSerializer
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 # Create your views here.
 def movie_index(request):
@@ -14,11 +17,20 @@ def movie_index(request):
     }
     return render(request, 'movies/index.html', context)
 
-def movie_recommend(request):
-    pass
-    
+def movie_recommend(request):    
+    # 최신 영화 10개
+    latest_movies = Movie.objects.order_by('-release_date')[:10]
+    # 인기 영화 10개
+    popular_movies = Movie.objects.order_by('popularity')[:10]
+    # 오늘의 추천 영화 : vote_count >= 15000, vote_average >= 8.0, 평점 순
+    today_movies = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('vote_average')[:10]
 
-
+    context = {
+        'latest_movies':latest_movies,
+        'popular_movies':popular_movies,
+        'today_movies':today_movies,
+    }
+    return render(request, 'movies/recommend.html', context) 
 
 
 @api_view(['GET'])
@@ -46,6 +58,8 @@ def movie_detail(request, movie_pk):
     return Response(serializer.data)
 
 @api_view(['GET', 'POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def rates_list(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == "GET":
@@ -89,9 +103,9 @@ def rates_detail(request, rate_pk):
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-def search(request):
-    words = Movie.objects.all() # 영화 정보 불러오기
-    word = request.GET.get('word','') # GET request의 인자 중에 word갑싱 있으면 가져오고, 없으면 빈 문자열 넣기
-    if word: # word 값이 있으면
-        words = words.filter(title__contains=word)
-    return render(request, 'movies/search.html', {'search':words, 'word':word})
+# def search(request):
+#     words = Movie.objects.all() # 영화 정보 불러오기
+#     word = request.GET.get('word','') # GET request의 인자 중에 word갑싱 있으면 가져오고, 없으면 빈 문자열 넣기
+#     if word: # word 값이 있으면
+#         words = words.filter(title__contains=word)
+#     return render(request, 'movies/search.html', {'search':words, 'word':word})

@@ -55,7 +55,7 @@ export default {
       if (Article.title) {
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/api/community/review/',
+          url: 'http://127.0.0.1:8000/community/review/',
           data: Article,
           headers: this.setToken()
         })

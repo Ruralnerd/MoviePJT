@@ -9,6 +9,13 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
+from django.shortcuts import render
+def index(request):
+    reviews = Review.objects.all()
+    context = {
+        'reviews':reviews
+    }
+    return render(request, 'community/index.html', context)
 @api_view(['GET', 'POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])

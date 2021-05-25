@@ -1,12 +1,12 @@
 <template>
   <div class="container col-sm-6" style="">
     <div class="d-flex flex-column justify-content-start">
-      <p class="bg-danger text-start">제목 : {{ detail.title }}</p>
+      <p class="text-start">제목 : {{ detail.title }}</p>
       <p class="text-start">영화 : {{ detail.movie_title }}</p>
-      <p class="text-start">본문 : {{ detail.content }}</p>
+      <p class="text-start">{{ detail.content }}</p>
       <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary" @click="goUpdate">수정</button>
-        <button type="button" class="btn btn-danger ms-1" @click="deleteDetail">삭제</button>
+        <button type="button" class="" @click="goUpdate">수정</button>
+        <button type="button" class="ms-1" @click="deleteDetail">삭제</button>
       </div>
       <hr>
       <p class="text-start">댓글</p>
@@ -57,7 +57,7 @@ export default {
     getDetail: function () {
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/api/community/review/${this.id}`,
+        url: `http://127.0.0.1:8000/community/review/${this.id}`,
         headers: this.setToken()
       })
         .then((response) => {
@@ -68,12 +68,13 @@ export default {
         })
     },
     goUpdate: function () {
-      this.$router.push({path: '/articleform', query:this.detail})
+      // this.$router.push({path: '/articleupdateform', query:this.detail})
+      this.$router.push({ name: 'ArticleUpdateForm' })
     },
     deleteDetail: function () {
       axios({
         method: 'delete',
-        url: `http://127.0.0.1:8000/api/community/review/${this.detail.id}/`,
+        url: `http://127.0.0.1:8000/community/review/${this.detail.id}/`,
         headers: this.setToken()
       })
         .then((response) => {
@@ -88,7 +89,7 @@ export default {
     getComments () {
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/api/community/review/${this.id}/comments/`,
+        url: `http://127.0.0.1:8000/community/review/${this.id}/comments/`,
         headers: this.setToken()
       })
         .then((response) => {
@@ -105,7 +106,7 @@ export default {
       if (Comment.content) {
         axios({
           method: 'post',
-          url: `http://127.0.0.1:8000/api/community/review/${this.detail.id}/comments/`,
+          url: `http://127.0.0.1:8000/community/review/${this.detail.id}/comments/`,
           data: Comment,
           headers: this.setToken()
         })
@@ -135,6 +136,10 @@ export default {
 <style>
   .rr {
     margin-left: 300px;
+  }
+  
+  .bgc {
+    background-color:blue
   }
 
 </style>

@@ -2,11 +2,10 @@
   <div class="container">
       <div class="carousel-item p-0 img_wrap">
         <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid hv" style="height:700px; width:500px" alt="..." @click="[saveId(), modalShow=!modalShow]">
-        <div class="container d-flex">
-          <p class="overview">
-            제목 {{ movie.title }}
-            평점 {{ movie.vote_average }}
-          개봉일 {{ movie.release_date }}</p>
+        <div class="container d-flex flex-column">
+          <p class="overview">개봉일 {{ movie.release_date }}</p>
+          <p class="overview">평점 {{ movie.vote_average }}</p>
+          <p class="overview">{{ movie.title }}</p>
           <!-- <p class="overview">평점 {{ movie.vote_average }}</p>
           <p class="overview">개봉일 {{ movie.release_date }}</p> -->
           <!-- <p class="overview">{{ movie.overview }}</p> -->
@@ -14,15 +13,20 @@
         <b-button @click="saveMovie" class="bt">☆</b-button>
       </div>
     <!-- <b-button @click="[modalShow=!modalShow, saveId()]">이거임</b-button> -->
-    <b-modal id="modal-xl" size="xl" v-model="modalShow" :title=savemovies[0].title class="">
+    <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=savemovies.title class="">
       <div class="d-flex">
-        <img :src="'https://image.tmdb.org/t/p/w400/'+ savemovies[0].poster_path" alt="" class="poster">
-        <p class="overview1" style="width:400px">{{ savemovies[0].overview }}</p>
-        <div class="w-25 d-flex flex-column p-3">
-          <p> 개봉일 {{ savemovies[0].release_date }}</p>
-          <p> 평점 {{ savemovies[0].vote_average }}</p>
+        <div class="img_wrap1 hv-1">
+          <img :src="'https://image.tmdb.org/t/p/w400/'+ savemovies.poster_path" alt="" class="hv1">
+          <p class="overview1" style="width:400px">{{ savemovies.overview }}</p>
         </div>
-        <ReviewList/>
+        <!-- <div class="w-25 d-flex flex-column p-3">
+        </div> -->
+        <div class='ms-4'>
+          <!-- 왼쪽이 데이터 오른쪽이 이름 -->
+          <ReviewList
+            :savemovies="savemovies"
+          />
+        </div>
       </div>
     </b-modal>
 
@@ -61,6 +65,19 @@ export default {
     saveId: function () {
       this.$store.dispatch('saveId', this.movie)
     },
+    // getReviews: function () {
+    //   axios({
+    //     method: 'get',
+    //     url: `http://127.0.0.1:8000/movies/movie_list/${this.savemovies[0].id}/rates/`,
+    //     headers: this.setToken()
+    //   })
+    //     .then((response) => {
+    //       this.reviews = response.data
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     })
+    // },    
   },
   computed: {
     recommendMovie: function () {
@@ -73,6 +90,9 @@ export default {
       return this.$store.state.savetitle
     }
   },
+  // created: function () {
+  //   this.getReviews()
+  // }
   // created: function () {
   //   this.$store.dispatch('saveTitle')
   // },
@@ -93,11 +113,10 @@ export default {
   .modal-header {
     background-color: black;
   }
-  
+/*   
   .close {
     visibility: hidden;
-
-  }
+  } */
 
   h5 {
     color: white;
@@ -111,11 +130,17 @@ export default {
     background-color: black;
   }
   
+  .modal-footer button {
+    background-color: blue;
+    font-size: 20px;
+    visibility: hidden;
+  }
   .overview {
-    position: absolute;
+    position: relative;
     margin-top: -200px;
     visibility: hidden;
     opacity: 0;
+    font-size: 40px;
   }
 
   .img_wrap:hover .overview {
@@ -126,6 +151,41 @@ export default {
   .hv:hover {
     opacity: 0.5;
   }
+
+  .overview {
+    position: relative;
+    margin-top: -200px;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 40px;
+  }
+
+  .img_wrap1:hover .overview1 {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .hv1:hover {
+    opacity: 0.5;
+  }
+
+  .overview1 {
+    margin-top: -550px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 20px;
+    padding:20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 16;    /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word;
+    line-height: 1.8rem;
+    height: 470px;
+  }
+
 
   .bt {
     position: relative;

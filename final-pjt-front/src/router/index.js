@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Cover from '../views/Cover.vue'
 import Main from '../views/movies/Main.vue'
 import RecommendedMovieList from '../views/movies/RecommendedMovieList.vue'
 import MyMovieList from '../views/movies/MyMovieList.vue'
@@ -11,6 +12,7 @@ import Article from '../components/community/Article.vue'
 import ArticleDetail from '../components/community/ArticleDetail.vue'
 
 import ArticleForm from '../components/community/ArticleForm.vue'
+import ArticleUpdateForm from '../components/community/ArticleUpdateForm.vue'
 
 import Signin from '../views/accounts/Signin.vue'
 import Signout from '../views/accounts/Signout.vue'
@@ -23,6 +25,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Cover',
+    component: Cover
+  },
+  {
+    path: '/main',
     name: 'Main',
     component: Main
   },
@@ -56,6 +63,12 @@ const routes = [
     path: '/articleform',
     name: 'ArticleForm',
     component: ArticleForm
+  },
+  {
+    path: '/articleupdateform/:id',
+    name: 'ArticleUpdateForm',
+    component: ArticleUpdateForm,
+    props: true
   },
   {
     path: '/signin',

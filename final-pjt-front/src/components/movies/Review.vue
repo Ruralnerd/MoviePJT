@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Review Detail</h1>
+    <!-- <h1>Review</h1> -->
+    <!-- <p>{{ review.user }}</p> -->
+    <p>{{ review.star }}점  {{ review.opinion }}</p>
   </div>
 </template>
 

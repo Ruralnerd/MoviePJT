@@ -11,7 +11,7 @@ export default new Vuex.Store({
     movies:[],
     mymovies:[],
     removies:[],
-    savemovies:[1],
+    savemovies:'',
     // savetitle:[],
   },
   mutations: {
@@ -19,8 +19,7 @@ export default new Vuex.Store({
       state.mymovies.push(movie)
     },
     SAVE_ID: function(state, movie) {
-      state.savemovies.unshift(movie)
-      state.savemovies.pop()
+      state.savemovies = movie
     },
     GET_MOVIES: function(state, movies) {
       // state.movies.push(movies)
@@ -40,7 +39,7 @@ export default new Vuex.Store({
     getMovies: function({ commit }) {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/api/movies/movie_list/'
+        url: 'http://127.0.0.1:8000/movies/movie_list/'
       })
         .then((response) => {
           console.log(response)

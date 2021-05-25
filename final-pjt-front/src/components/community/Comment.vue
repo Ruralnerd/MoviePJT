@@ -1,8 +1,9 @@
 <template>
   <div class="d-flex">
-    <p>{{ comment.content }}</p>
-    <button type="button" class="btn btn-danger ms-3" @click="deleteComment">삭제</button>
-    <button @click="check">체크</button>
+    <p class="text-start">{{ comment.content }}</p>
+    <div class="d-flex justify-content-end align-items-start">
+      <button type="button" class="ms-2" @click="deleteComment" style="">삭제</button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +30,7 @@ export default {
     deleteComment: function () {
       axios({
         method: 'delete',
-        url: `http://127.0.0.1:8000/api/community/comments/${this.comment.id}/`,
+        url: `http://127.0.0.1:8000/community/comments/${this.comment.id}/`,
         headers: this.setToken()
       })
         .then((response) => {

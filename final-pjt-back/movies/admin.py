@@ -6,7 +6,11 @@ class MovieAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'title',
-        'release_date'
+        'original_title',
+        'popularity',
+        'vote_average',
+        'vote_count',
+        'release_date',
     )
     list_display_links = (
         'title',
@@ -14,13 +18,13 @@ class MovieAdmin(admin.ModelAdmin):
 admin.site.register(models.Movie, MovieAdmin)
 
 class RateAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = [
         'user',
         'movie_title',
         'star',
         'created_at',
         'updated_at'
-    )
+    ]
 
     def movie_title(self, obj):
         return obj.movie.title

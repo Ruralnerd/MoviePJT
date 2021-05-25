@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="width:600px">
+  <div class="container col-sm-10" style="">
     <h1>커뮤니티 페이지</h1>
     <table class="table table-dark table-hover">
       <thead>
@@ -47,7 +47,7 @@ export default {
     getArticles: function () {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/api/community/review/',
+        url: 'http://127.0.0.1:8000/community/review/',
         headers: this.setToken()
       })
         .then((response) => {

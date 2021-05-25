@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-50 h-75">
+  <div class="container w-50 h-75 mt-3">
     <!-- interval 자동으로 슬라이드가 넘어가는 시간 -->
       <b-carousel
         id="carousel-1"
@@ -71,6 +71,9 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-family: DungGeunMo;
+}
   .test:hover {
     color: lightcoral;
     visibility: hidden;

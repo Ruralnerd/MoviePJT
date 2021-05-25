@@ -15,17 +15,20 @@ class Movie(models.Model):
     original_language = models.TextField(blank=True)
     original_title = models.TextField(blank=True)
     title = models.CharField(max_length=150)
-    overview = models.TextField(blank=True)
+    overview = models.CharField(max_length=254)
     popularity = models.FloatField(blank=True)
     poster_path = models.CharField(max_length=255, blank=True)
     release_date = models.DateField(blank=True)
     vote_average = models.FloatField(blank=True)
     vote_count = models.IntegerField(blank=True)
+
+    def __str__(self):
+        return self.title
     
 class Rate(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     star = models.IntegerField()
-    opinion = models.CharField(max_length=200)
+    opinion = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
