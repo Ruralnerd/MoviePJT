@@ -13,7 +13,7 @@
       <div class="p-1">
         <textarea class="form-control" placeholder="본문" id="floatingContent" v-model="content" style=""></textarea>
       </div>
-      <b-button @click="createArticle">작성</b-button>
+      <b-button @click="updateDetail">수정</b-button>
     </div>
   </div>
 </template>
@@ -22,12 +22,18 @@
 import axios from 'axios'
 
 export default {
-  name: 'ArticleForm',
+  name: 'ArticleUpdateForm',
   data: function () {
     return {
-      title: '',
-      movie_title: '',
-      content: '',
+      title: this.$route.query.title,
+      movie_title: this.$route.query.movie_title,
+      content: this.$route.query.content,
+      id: this.$route.query.id,
+    }
+  },
+  mounted: function () {
+    if(this.query) {
+      this.getDetail()
     }
   },
   methods: {
@@ -38,32 +44,23 @@ export default {
       }
       return config
     },
+    getDetail: function () {
+      
+    },
     // 장고로 신호 쏴줘야해 ..
-    createArticle: function() {
-      const Article = {
-        title: this.title,
-        content: this.content,
-        movie_title: this.movie_title,
-        id: this.id
-      }
-      console.log(Article)
-      // 값이 있다면
-      if (Article.title) {
-        axios({
-          method: 'post',
-          url: 'http://127.0.0.1:8000/api/community/review/',
-          data: Article,
-          headers: this.setToken()
+    updateDetail: function () {
+      axios({
+        method: 'put',
+        url: ``,
+        data:'',
+        headers: this.setToken(),
+      })
+        .then((response) => {
+          console.log(response)
         })
-          .then((response) => {
-            console.log(response)
-            // 글 작성이 완료되면 어디로 보내줄까?
-            this.$router.push({ name: 'Community' })
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      }
+        .catch((error) => {
+          console.log(error)
+        })
     },
   }
 }

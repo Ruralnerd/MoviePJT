@@ -2,12 +2,14 @@
   <div class="container">
       <div class="carousel-item p-0">
         <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid" style="height:700px; width:500px" alt="..." @click="[saveId(), modalShow=!modalShow]">
-        <!-- <p>{{ movie.title }}</p> -->
+        <p>{{ movie.title }}</p>
+        <b-button @click="saveMovie" class="bt">☆</b-button>
       </div>
     <!-- <b-button @click="[modalShow=!modalShow, saveId()]">이거임</b-button> -->
     <b-modal id="modal-xl" size="xl" v-model="modalShow" :title=savemovies[0].title class="">
       <div class="d-flex">
-        <img :src="'https://image.tmdb.org/t/p/w500/'+ savemovies[0].poster_path" alt="">
+        <img :src="'https://image.tmdb.org/t/p/w400/'+ savemovies[0].poster_path" alt="" class="poster">
+        <p class="overview" style="width:400px">{{ savemovies[0].overview }}</p>
         <div class="w-25 d-flex flex-column p-3">
           <p> 개봉일 {{ savemovies[0].release_date }}</p>
           <p> 평점 {{ savemovies[0].vote_average }}</p>
@@ -91,6 +93,13 @@ export default {
   .modal-footer {
     background-color: black;
   }
+  
+  .overview {
+    position: absolute;
+  }
 
-
+  .bt {
+    position: relative;
+    padding-right: 200px;
+  }
 </style>

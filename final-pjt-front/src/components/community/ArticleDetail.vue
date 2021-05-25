@@ -4,6 +4,8 @@
       <p class="bg-danger">제목 : {{ detail.title }}</p>
       <p>영화 : {{ detail.movie_title }}</p>
       <p>본문 : {{ detail.content }}</p>
+      <button type="button" class="btn btn-primary" @click="goUpdate">수정</button>
+      <button type="button" class="btn btn-danger" @click="deleteDetail">삭제</button>
       <hr>
       <p>댓글</p>
       <Comment
@@ -34,7 +36,7 @@ export default {
     return {
       detail:[],
       comments:[],
-      content:'',
+      content:null,
     }
   },
   props: {
@@ -58,6 +60,24 @@ export default {
       })
         .then((response) => {
           this.detail = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    goUpdate: function () {
+      this.$router.push({path: '/articleform', query:this.detail})
+    },
+    deleteDetail: function () {
+      axios({
+        method: 'delete',
+        url: `http://127.0.0.1:8000/api/community/review/${this.detail.id}/`,
+        headers: this.setToken()
+      })
+        .then((response) => {
+          console.log(response)
+          // 글 삭제가 완료되면 게시판으로 보내자
+          this.$router.push({ name: 'Community' })
         })
         .catch((error) => {
           console.log(error)
@@ -89,7 +109,9 @@ export default {
         })
           .then((response) => {
             console.log(response)
-            this.$router.push({ name: 'ArticleDetail', params: {id:`${this.detail.id}`} })
+            this.getComments()
+            // 댓글을 작성했으면 댓글창을 초기화하는 코드가 있어야함
+            // ????
           })
           .catch((error) => {
             console.log(error)

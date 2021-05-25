@@ -1,12 +1,10 @@
 <template>
-  <div class="d-flex justify-content-between container m-2 cnt">
-    <div class="ms-5">
-      <p><router-link :to="`/articledetail/${article.id}`" class="text-decoration-none p-2">{{ article.title }}</router-link>[{{ article.comment_count }}]</p>
-    </div>
-    <div class="me-5">
-      <p class="">{{ article.created_at }}</p>
-    </div>
-  </div>
+  <tr>
+    <th scope="row">{{article.id}}</th>
+    <td><router-link :to="`/articledetail/${article.id}`" class="text-decoration-none p-2">{{ article.title }}[{{ article.comment_count }}]</router-link></td>
+    <td>작성자</td>
+    <td>{{ article.created_at }}</td>
+  </tr>
 </template>
 
 <script>

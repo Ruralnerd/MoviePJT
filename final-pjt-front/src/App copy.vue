@@ -20,10 +20,10 @@
               <template #button-content>
                 <span class="p-2">User</span>
               </template>
-              <span v-if="isSignin"><b-dropdown-item :to="{ name: 'Signout' }" class="text-decoration-none" @click.native="signout">Sign out</b-dropdown-item></span>
+              <span v-if="isSignin"><b-dropdown-item><router-link :to="{ name: 'Signout' }" class="text-decoration-none" @click.native="signout">Sign out</router-link></b-dropdown-item></span>
               <span v-else>
-                <b-dropdown-item :to="{ name: 'Signup' }" class="text-decoration-none">Sign up</b-dropdown-item>
-                <b-dropdown-item :to="{ name: 'Signin' }" class="text-decoration-none">Sign in</b-dropdown-item>
+                <b-dropdown-item><router-link :to="{ name: 'Signup' }" class="text-decoration-none">Sign up</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link :to="{ name: 'Signin' }" class="text-decoration-none">Sign in</router-link></b-dropdown-item>
               </span>
             </b-nav-item-dropdown>
           </b-navbar-nav>

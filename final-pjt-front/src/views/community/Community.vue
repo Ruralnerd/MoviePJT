@@ -1,13 +1,23 @@
 <template>
   <div>
     <h1>커뮤니티 페이지</h1>
-    <ul>
-      <Article
-        v-for="(article, idx) in articles"
-        :key="idx"
-        :article="article"
-      />
-    </ul>
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">글번호</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">등록일</th>
+        </tr>
+      </thead>
+      <tbody>
+          <Article
+            v-for="(article, idx) in articles"
+            :key="idx"
+            :article="article"
+          />
+      </tbody>
+    </table>    
     <router-link :to="{ name: 'ArticleForm' }" class="text-decoration-none p-2"><b-button>글쓰기</b-button></router-link>
   </div>
 </template>

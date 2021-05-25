@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/movies/Main.vue'
-import Recommended from '../views/movies/Recommended.vue'
+import RecommendedMovieList from '../views/movies/RecommendedMovieList.vue'
 import MyMovieList from '../views/movies/MyMovieList.vue'
-import MovieAdd from '../views/movies/MovieAdd.vue'
 
 import Community from '../views/community/Community.vue'
 
@@ -28,19 +27,14 @@ const routes = [
     component: Main
   },
   {
-    path: '/recommended',
-    name: 'Recommended',
-    component: Recommended
+    path: '/recommendedmovielist',
+    name: 'RecommendedMovieList',
+    component: RecommendedMovieList
   },
   {
     path: '/mymovielist',
     name: 'MyMovieList',
     component: MyMovieList
-  },
-  {
-    path: '/movieadd',
-    name: 'MovieAdd',
-    component: MovieAdd
   },
   {
     path: '/community',

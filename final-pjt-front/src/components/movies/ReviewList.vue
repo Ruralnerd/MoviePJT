@@ -26,6 +26,7 @@ export default {
   data: function () {
     return {
       reviews: null,
+      content: null,
     }
   },
   methods: {

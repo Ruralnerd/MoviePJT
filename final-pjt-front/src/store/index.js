@@ -28,10 +28,14 @@ export default new Vuex.Store({
   },
   getter: {
     recommendMovie: function(state) {
-      if (state.mymovies.vote_average > 9) {
+      if (state.mymovies.vote_average > 5) {
         state.removies.push(state.mymovies)
       }
     }
+  },
+  created: function () {
+    this.saveMovie()
+    this.saveId()
   },
   modules: {
   }

@@ -26,6 +26,8 @@ def review_list(request):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
@@ -67,6 +69,8 @@ def comments_list(request, review_pk):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def comments_detail(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     if request.method == 'GET':
@@ -77,7 +81,7 @@ def comments_detail(request, comment_pk):
         if request.user == comment.user:
             request.data["user"] = request.user.id
             request.data["review"] = comment.review.id
-            if request.mehtod == 'PUT':
+            if request.method == 'PUT':
                 serializer = CommentSerializer(Comment, data=request.data)
                 if serializer.is_valid(raise_exception=True):
                     serializer.save()
@@ -86,7 +90,7 @@ def comments_detail(request, comment_pk):
                 comment.delete()
                 data = {
                     'id': comment_pk,
-                    'delete': f'{comment_pk}번 평점이 삭제되었습니다.'
+                    'delete': f'{comment_pk}번 댓글이 삭제되었습니다.'
                 }
                 return Response(data, status=status.HTTP_204_NO_CONTENT)
         else:
