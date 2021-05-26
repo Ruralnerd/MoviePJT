@@ -12,6 +12,7 @@ export default new Vuex.Store({
     mymovies:[],
     removies:[],
     savemovies:'',
+    
     // savetitle:[],
   },
   mutations: {

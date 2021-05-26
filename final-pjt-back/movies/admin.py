@@ -18,14 +18,14 @@ class MovieAdmin(admin.ModelAdmin):
 admin.site.register(models.Movie, MovieAdmin)
 
 class RateAdmin(admin.ModelAdmin):
-    list_display = [
+    list_display = (
         'user',
         'movie_title',
         'opinion',
         'star',
         'created_at',
         'updated_at'
-    ]
+    )
     # 괄호차이?
     list_display_links = (
         'opinion',

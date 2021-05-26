@@ -21,19 +21,27 @@ def movie_index(request):
 
 def movie_recommend(request):    
     # 최신 영화 10개
-    latest_movies = Movie.objects.order_by('-release_date')[:10]
+    latest_movies = Movie.objects.order_by('-release_date')[:5]
     # 인기 영화 10개
-    popular_movies = Movie.objects.order_by('popularity')[:10]
-    # 오늘의 추천 영화 : vote_count >= 15000, vote_average >= 8.0, 평점 순
-    today_movies = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('vote_average')[:10]
+    popular_movies = Movie.objects.order_by('popularity')[:5]
+    # 오늘의 영화 추천: vote_count >= 15000, vote_average >= 8.0, 평점 순
+    today_movies = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('vote_average')[:5]
+    # 장르별 영화 추천
+    genre = {"액션":28, "모험":12, "애니메이션":16, "코미디":35, "범죄":80, "다큐멘터리":99, "드라마":18, "가족":10751, "판타지":14, "역사":36, "공포":27, "음악":10402, "미스터리":9648, "로맨스":10749, "SF":878, "TV영화":10770, "스릴러":53, "전쟁":10752, "서부":37}
+
+    genre_movies = []
+
+    for key, value in genre.items():
+        movie = Movie.objects.filter(genre_ids=value).order_by('-popularity')[:5]
+        genre_movies.append([key, movie])
 
     context = {
         'latest_movies':latest_movies,
         'popular_movies':popular_movies,
         'today_movies':today_movies,
+        'genre_movies': genre_movies,
     }
-    return render(request, 'movies/recommend.html', context) 
-
+    return render(request, 'movies/recommend.html', context)
 
 @api_view(['GET'])
 def genres_list(request):

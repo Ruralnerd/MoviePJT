@@ -49,9 +49,6 @@ export default {
   created: function () {
     this.$store.dispatch('getMovies')
   },
-  // mounted: function () {
-  //   const movies = _.shuffle([this.movies])
-  // },
   computed: {
     // movies: function () {
     //   return this.$store.state.movies
