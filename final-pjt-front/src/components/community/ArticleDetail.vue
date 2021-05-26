@@ -1,5 +1,5 @@
 <template>
-  <div class="container col-sm-6" style="">
+  <div class="container col-sm-6 mt-5" style="">
     <div class="d-flex flex-column justify-content-start">
       <p class="text-start">제목 : {{ detail.title }}</p>
       <p class="text-start">영화 : {{ detail.movie_title }}</p>
@@ -15,6 +15,7 @@
         :key="idx"
         :comment="comment"
         :detail="detail"
+        @deleteComment="deleteComment"
       />
       <!-- <Comment :detail="detail"/> -->
       <div class="p-1">
@@ -120,7 +121,20 @@ export default {
           })
       }
     },
-
+    deleteComment: function (commentId) {
+      axios({
+        method: 'delete',
+        url: `http://127.0.0.1:8000/community/comments/${commentId}/`,
+        headers: this.setToken()
+      })
+        .then((response) => {
+          console.log(response)
+          this.getComments()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     check () {
       console.log(this.detail)
     }

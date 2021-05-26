@@ -1,6 +1,6 @@
 <template>
-  <div class="cc">
-    <div class="container w-50 h-75 mt-3">
+  <div class="">
+    <div class="container col-sm-8 h-75 mt-5 cc">
       <!-- interval 자동으로 슬라이드가 넘어가는 시간 -->
         <b-carousel
           id="carousel-1"
@@ -36,7 +36,7 @@
             <vue-glide-slide
               v-for="(latestmovie, idx) in latestmovies"
               :key="idx"
-              style="width:600px"          
+              style=""          
             >
               <LatestMovie :latestmovie="latestmovie"/>
             </vue-glide-slide>
@@ -110,10 +110,12 @@ export default {
     }
   },
   created: function () {
-    this.$store.dispatch('getMovies')
-    this.$store.dispatch('getLatest')
-    this.$store.dispatch('getPopular')
-    this.$store.dispatch('getToday')
+    if (this.$store.state.movies.length) {
+      this.$store.dispatch('getMovies')
+      this.$store.dispatch('getLatest')
+      this.$store.dispatch('getPopular')
+      this.$store.dispatch('getToday')
+    }
   },
   computed: {
     // movies: function () {
@@ -155,5 +157,9 @@ export default {
   .gld h1 {
     color: yellow;
     text-align: start;
+  }
+
+  .cc {
+    background-color:wh;
   }
 </style>

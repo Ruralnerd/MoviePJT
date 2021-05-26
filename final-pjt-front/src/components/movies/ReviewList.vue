@@ -1,12 +1,13 @@
 <template>
-  <div class="container">
-    <div class="d-flex flex-column justify-content-center box">
+  <div class="container box1" style="">
+    <div class="d-flex flex-column box2">
     <h1>리뷰 페이지</h1>
       <ul>
         <Review
           v-for="(review, idx) in reviews"
           :key="idx"
           :review="review"
+          @deleteReview="deleteReview"
         />
       </ul>
       <div class="p-1 d-flex align-items-end flex-column">
@@ -18,7 +19,6 @@
 </template>
 
 <script>
-
 import axios from 'axios'
 import StarRating from 'vue-star-rating'
 import Review from '@/components/movies/Review.vue'
@@ -86,8 +86,22 @@ export default {
           .catch((error) => {
             console.log(error)
           })
-      // }
-    } 
+    },
+    deleteReview: function (reviewId) {
+      console.log(reviewId)
+      axios({
+        method: 'delete',
+        url: `http://127.0.0.1:8000/movies/rates/${reviewId}/`,
+        headers: this.setToken()
+      })
+        .then((response) => {
+          console.log(response)
+          this.getReviews()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   },
   created: function () {
     this.getReviews()
@@ -96,8 +110,11 @@ export default {
 </script>
 
 <style>
- .box {
-   border: 5px solid red;
- }
+  .box1 {
+    border: 5px solid skyblue;
+  }
+  .box2 {
+    border: 5px solid yellow;
+  }
 
 </style>

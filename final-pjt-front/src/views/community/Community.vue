@@ -1,5 +1,5 @@
 <template>
-  <div class="container col-sm-10" style="">
+  <div class="container col-sm-10 mt-5" style="">
     <h1>자유 게시판</h1>
     <table class="table table-dark table-hover">
       <thead>
@@ -71,5 +71,8 @@ export default {
 </script>
 
 <style>
+  h1 {
+    color:yellow
+  }
 
 </style>

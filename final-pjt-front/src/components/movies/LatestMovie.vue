@@ -36,10 +36,10 @@ export default {
 
   .overview2 {
     position: relative;
-    margin-top: -250px;
+    margin-top: -200px;
     visibility: hidden;
     opacity: 0;
-    font-size: 30px;
+    font-size: 15px;
   }
 
   .mh {

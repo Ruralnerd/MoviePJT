@@ -9,12 +9,12 @@
         </div>
       </div>
     <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=savemovies.title class="">
-      <div class="d-flex">
-        <div class="img_wrap1 hv-1">
+      <div class="d-flex box3">
+        <div class="img_wrap1 hv-1 box4">
           <img :src="'https://image.tmdb.org/t/p/w400/'+ savemovies.poster_path" alt="" class="hv1">
           <p class="overview1" style="width:400px">{{ savemovies.overview }}</p>
         </div>
-        <div class='ms-4'>
+        <div class='ms-4' style="flex:1;">
           <!-- 왼쪽이 데이터 오른쪽이 이름 -->
           <ReviewList
             :savemovies="savemovies"
@@ -72,6 +72,14 @@ export default {
 </script>
 
 <style>
+  .box3 {
+    border: 5px solid red;
+  }
+  .box4 {
+    border: 5px solid blue;
+  }
+
+
   .pos {
     margin-left: 210px;
     margin-bottom: 100px;

@@ -16,10 +16,7 @@ export default {
   },
   props: {
     comment: {
-      type: Object,
-    },
-    detail: {
-      type:Object,
+      type: [Object,Number,String]
     },
   },
   methods: {
@@ -31,20 +28,21 @@ export default {
       return config
     },
     deleteComment: function () {
-      axios({
-        method: 'delete',
-        url: `http://127.0.0.1:8000/community/comments/${this.comment.id}/`,
-        headers: this.setToken()
-      })
-        .then((response) => {
-          console.log(response)
-          // 코멘트를 삭제했다 그럼 다시 데이터 요청해야하는데
-          // 다른 곳에 있는 함수를 여기서도 써야함
-          // 어떻게 해야할지 모르겄따;
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      this.$emit('deleteComment', this.comment.id)
+      // axios({
+      //   method: 'delete',
+      //   url: `http://127.0.0.1:8000/community/comments/${this.comment.id}/`,
+      //   headers: this.setToken()
+      // })
+      //   .then((response) => {
+      //     console.log(response)
+      //     // 코멘트를 삭제했다 그럼 다시 데이터 요청해야하는데
+      //     // 다른 곳에 있는 함수를 여기서도 써야함
+      //     // 어떻게 해야할지 모르겄따;
+      //   })
+      //   .catch((error) => {
+      //     console.log(error)
+      //   })
     },
     getComments () {
       axios({

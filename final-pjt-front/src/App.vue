@@ -12,9 +12,9 @@
               </b-navbar-nav>
 
               <b-navbar-nav class="ml-auto">
-                <b-nav-form>
+                <b-nav-form class="">
                   <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                  <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+                  <button size="sm" class="my-2 my-sm-0" type="button">Search</button>
                 </b-nav-form>
 
                 <b-nav-item-dropdown right>
