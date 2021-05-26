@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
-{% comment %} {% load bootstrap5 %} {% endcomment %}
 
 {% block content %}
+  <h1>확인용</h1>
   <h1>MOVIES INDEX PAGE</h1>
   <hr>
-  <!-- 최신, 인기, 오늘의 추천 영화 -->
+  <!-- 장르별, 최신, 인기, 오늘의 추천 영화 -->
+  <h2>장르별 영화</h2>
+  <hr>
+  <div>
+    {% for genre, movie in genre_movies %}
+      <h3>장르 : {{genre}}</h3>
+      <ol>
+        {% for single_movie in movie %}
+          <li>
+            <p>{{ single_movie.title }}</p>
+          </li>
+        {% endfor %}
+      </ol>
+      <hr>
+    {% endfor %}
+  </div>
   <h2>최신영화</h2>
   <ol>
     {% for latest_movie in latest_movies %}
       <li>
-        </p>{{ latest_movie.original_title }}</p>
+        <p>{{ latest_movie.original_title }}</p>
       </li>
     {% endfor %}
   </ol>
@@ -18,7 +33,7 @@
   <ol>
     {% for popular_movie in popular_movies %}
       <li>
-        </p>{{ popular_movie.original_title }}</p>
+        <p>{{ popular_movie.original_title }}</p>
       </li>
     {% endfor %}
   </ol>
@@ -27,7 +42,7 @@
   <ol>
     {% for today_movie in today_movies %}
       <li>
-        </p>{{ today_movie.original_title }}</p>
+        <p>{{ today_movie.original_title }}</p>
       </li>
     {% endfor %}
   </ol>

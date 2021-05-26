@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
-{% comment %} {% load bootstrap5 %} {% endcomment %}
 
 {% block content %}
+  <h1>확인용</h1>
   <h1>MOVIES INDEX PAGE</h1>
+  <!-- 검색 기능 -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <form class="d-flex" action={% url 'movies:search' %}>
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </nav>
   <hr>
+  <!-- 영화 목록 띄우기 -->
   {% for movie in movies %}
     <h2>{{movie.title}}</h2>
     <a href="{% url "movies:movie_detail" movie.pk %}">[detail]</a>
     <hr>
   {% endfor %}
+
 {% endblock content %}

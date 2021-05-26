@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex">
-    <p class="text-start">{{ comment.content }}</p>
+    <p class="text-start">{{ comment.content }} {{comment.created_at}}</p>
     <div class="d-flex justify-content-end align-items-start">
       <button type="button" class="ms-2" @click="deleteComment" style="">삭제</button>
     </div>

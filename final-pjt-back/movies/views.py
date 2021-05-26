@@ -1,5 +1,4 @@
-from movies.serializers import MovieSerializer
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,16 +12,6 @@ from django.http import JsonResponse
 
 from django.db.models import Q
 
-
-def latest_movies(request): # 최신 영화 5개
-    latest = Movie.objects.order_by('-release_date')[:5]
-    latest_movies = serializers.serialize('json', latest)
-    context = {
-        'latest_movies':latest_movies,
-    }
-    return JsonResponse(context)
-
-    
 # Create your views here.
 def movie_index(request):
     movies = Movie.objects.all()
@@ -30,6 +19,19 @@ def movie_index(request):
         'movies': movies,
     }
     return render(request, 'movies/index.html', context)
+
+@api_view(['GET'])
+def movie_list(request):
+    movies = Movie.objects.all()
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
+    
+@api_view(['GET'])
+def movie_detail(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data)
+
 
 def movie_recommend(request):    
     # 최신 영화 10개
@@ -53,31 +55,47 @@ def movie_recommend(request):
         'today_movies':today_movies,
         'genre_movies': genre_movies,
     }
-    return render(request, 'movies/recommend.html', context)
+    return render(request, 'movies/recommend.html', context)    
 
-@api_view(['GET'])
-def genres_list(request):
-    genres = Genre.objects.all()
-    serializer = GenreSerializer(genres, many=True)
-    return Response(serializer.data)
 
-@api_view(['GET'])
-def genres_detail(request, genres_pk):
-    genre = get_object_or_404(Genre, pk=genres_pk)
-    serializer = GenreSerializer(genre)
-    return Response(serializer.data)
+def latest_movies(request): # 최신 영화 5개
+    latest = Movie.objects.order_by('-release_date')[:5]
+    latest_movies = serializers.serialize('json', latest)
+    context = {
+        'latest_movies':latest_movies,
+    }
+    return JsonResponse(context)
 
-@api_view(['GET'])
-def movie_list(request):
-    movies = Movie.objects.all()
-    serializer = MovieSerializer(movies, many=True)
-    return Response(serializer.data)
-    
-@api_view(['GET'])
-def movie_detail(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    serializer = MovieSerializer(movie)
-    return Response(serializer.data)
+def popular_movies(request): # 인기 영화 5개
+    popular = Movie.objects.order_by('popularity')[:5]
+    popular_movies = serializers.serialize('json', popular)
+    context = {
+        'popular_movies':popular_movies,
+    }
+    return JsonResponse(context)
+
+def today_movies(request): # 오늘의 영화 추천 5개: vote_count >= 15000, vote_average >= 8.0, 평점 순
+    today = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('vote_average')[:5]
+    today_movies = serializers.serialize('json', today)    
+    context = {
+        'today_movies':today_movies,
+    }
+    return JsonResponse(context)
+
+def genre_movies(request):
+    # 장르별 영화 추천
+    genre = {"액션":28, "모험":12, "애니메이션":16, "코미디":35, "범죄":80, "다큐멘터리":99, "드라마":18, "가족":10751, "판타지":14, "역사":36, "공포":27, "음악":10402, "미스터리":9648, "로맨스":10749, "SF":878, "TV영화":10770, "스릴러":53, "전쟁":10752, "서부":37}
+    genre_movies = []
+
+    for key, value in genre.items():
+        movie = Movie.objects.filter(genre_ids=value).order_by('-popularity')[:5]
+        genre_movies.append([key, movie])
+
+    genre_movieslist = serializers.serialize('json', genre_movies)
+    context = {
+        'genre_movieslist':genre_movieslist,
+    }
+    return JsonResponse(context)   
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JSONWebTokenAuthentication])

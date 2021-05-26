@@ -4,9 +4,7 @@ from .models import Genre, Movie, Rate
 
 class RateSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField()
-    # movie_title = serializers.ReadOnlyField()
-    # created_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
-    # updated_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
+    movie_title = serializers.ReadOnlyField()
         
     class Meta:
         model = Rate
