@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Cover from '../views/Cover.vue'
 import Main from '../views/movies/Main.vue'
 import RecommendedMovieList from '../views/movies/RecommendedMovieList.vue'
-import MyMovieList from '../views/movies/MyMovieList.vue'
+import YoutubeSearch from '../views/movies/YoutubeSearch.vue'
 
 import Community from '../views/community/Community.vue'
 
@@ -15,7 +15,6 @@ import ArticleForm from '../components/community/ArticleForm.vue'
 import ArticleUpdateForm from '../components/community/ArticleUpdateForm.vue'
 
 import Signin from '../views/accounts/Signin.vue'
-import Signout from '../views/accounts/Signout.vue'
 import Signup from '../views/accounts/Signup.vue'
 
 
@@ -39,9 +38,9 @@ const routes = [
     component: RecommendedMovieList
   },
   {
-    path: '/mymovielist',
-    name: 'MyMovieList',
-    component: MyMovieList
+    path: '/youtubesearch',
+    name: 'YoutubeSearch',
+    component: YoutubeSearch
   },
   {
     path: '/community',
@@ -74,11 +73,6 @@ const routes = [
     path: '/signin',
     name: 'Signin',
     component: Signin
-  },
-  {
-    path: '/signout',
-    name: 'Signout',
-    component: Signout
   },
   {
     path: '/signup',

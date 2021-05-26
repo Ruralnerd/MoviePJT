@@ -4,7 +4,6 @@
     <div class="container col-sm-4">
       <div class="p-1">
         <textarea class="form-control" placeholder="제목" id="floatingTitle" v-model="title" style="height:15px"></textarea>
-        <!-- <label for="floatingTextarea">제목</label> -->
       </div>   
       <div class="p-1">
         <textarea class="form-control" placeholder="영화 제목" id="floatingMovieTitle" v-model="movie_title" style="height:15px"></textarea>
@@ -28,17 +27,8 @@ export default {
       title: '',
       movie_title: '',
       content: '',
-      // title: this.$route.query.title,
-      // movie_title: this.$route.query.movie_title,
-      // content: this.$route.query.content,
-      // id: this.$route.query.id,
     }
   },
-  // mounted: function () {
-  //   if(this.query) {
-  //     this.getDetail()
-  //   }
-  // },
   methods: {
     setToken: function () {
       const token = localStorage.getItem('jwt')

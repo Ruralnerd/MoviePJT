@@ -9,9 +9,7 @@
           :review="review"
         />
       </ul>
-      <!-- <button @click="getReviews"></button> -->
       <div class="p-1 d-flex align-items-end flex-column">
-        <!-- <textarea class="form-control" placeholder="별점" id="floatingReview" v-model="rating" style="" @keyup.enter="createReview"></textarea> -->
         <star-rating v-model="star" :star-size="20" :increment="0.5" :show-rating=false></star-rating>
         <textarea class="form-control mt-1" placeholder="리뷰" id="floatingReview" v-model="opinion" style="" @keyup.enter="createReview"></textarea>
     </div>

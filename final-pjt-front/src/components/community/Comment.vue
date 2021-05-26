@@ -18,6 +18,9 @@ export default {
     comment: {
       type: Object,
     },
+    detail: {
+      type:Object,
+    },
   },
   methods: {
     setToken: function () {
@@ -37,12 +40,25 @@ export default {
           console.log(response)
           // 코멘트를 삭제했다 그럼 다시 데이터 요청해야하는데
           // 다른 곳에 있는 함수를 여기서도 써야함
-          // this.getComments()
+          // 어떻게 해야할지 모르겄따;
         })
         .catch((error) => {
           console.log(error)
         })
     },
+    getComments () {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/community/review/${this.id}/comments/`,
+        headers: this.setToken()
+      })
+        .then((response) => {
+          this.comments = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },    
     check: function () {
       console.log(this.comment.id)
     }

@@ -44,13 +44,11 @@ export default {
       console.log(this.credentials)
       axios({
         method: 'post',
-        // url 이따 쓸 것
         url: 'http://127.0.0.1:8000/accounts/signup/',
         data: this.credentials
       })
         .then(response => {
           console.log(response)
-          // console.log(this.credentials)
           this.$router.push({ name: 'Signin' })
         })
         .catch(error => {
@@ -62,9 +60,5 @@ export default {
 </script>
 
 <style>
-/* .box {
-  border: 2px hidden solid;
-  border-radius: 5px;
-} */
 
 </style>

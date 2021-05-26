@@ -1,5 +1,4 @@
 <template>
-<!-- 이따 와서 중앙정렬 할 것 -->
   <div class="container w-50 col-sm-2 mt-3">
     <div class="bg1 p-5">
       <b-form class="">
@@ -37,7 +36,6 @@ export default {
   },
   methods: {
     signin: function () {
-      // console.log(this.credentials)
       axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/accounts/api-token-auth/',
@@ -46,7 +44,6 @@ export default {
         .then(response => {
           console.log(response)
           localStorage.setItem('jwt', response.data.token)
-          // this.$emit('signin')
           this.$router.push({ name: 'Main' })
         })
         .catch(error => {
@@ -66,7 +63,6 @@ export default {
 
 .bg1 {
   background-color:	#0000CD ;
-  /* color: aqua; */
   color:white;
 }
 </style>

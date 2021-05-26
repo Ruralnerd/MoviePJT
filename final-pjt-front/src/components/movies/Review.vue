@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <h1>Review</h1> -->
-    <!-- <p>{{ review.user }}</p> -->
     <p>{{ review.star }}점  {{ review.opinion }}<button type="button" class="ms-2" style="" @click="deleteReview">x</button></p>
   </div>
 </template>

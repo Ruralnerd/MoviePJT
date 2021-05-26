@@ -8,7 +8,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from django.core import serializers
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from django.db.models import Q
 
@@ -32,55 +32,20 @@ def movie_detail(request, movie_pk):
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
-
-def movie_recommend(request):    
-    # 최신 영화 10개
-    latest_movies = Movie.objects.order_by('-release_date')[:5]
-    # 인기 영화 10개
-    popular_movies = Movie.objects.order_by('popularity')[:5]
-    # 오늘의 영화 추천: vote_count >= 15000, vote_average >= 8.0, 평점 순
-    today_movies = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('vote_average')[:5]
-    # 장르별 영화 추천
-    genre = {"액션":28, "모험":12, "애니메이션":16, "코미디":35, "범죄":80, "다큐멘터리":99, "드라마":18, "가족":10751, "판타지":14, "역사":36, "공포":27, "음악":10402, "미스터리":9648, "로맨스":10749, "SF":878, "TV영화":10770, "스릴러":53, "전쟁":10752, "서부":37}
-
-    genre_movies = []
-
-    for key, value in genre.items():
-        movie = Movie.objects.filter(genre_ids=value).order_by('-popularity')[:5]
-        genre_movies.append([key, movie])
-
-    context = {
-        'latest_movies':latest_movies,
-        'popular_movies':popular_movies,
-        'today_movies':today_movies,
-        'genre_movies': genre_movies,
-    }
-    return render(request, 'movies/recommend.html', context)    
-
-
 def latest_movies(request): # 최신 영화 5개
-    latest = Movie.objects.order_by('-release_date')[:5]
+    latest = Movie.objects.order_by('-release_date')[:20]
     latest_movies = serializers.serialize('json', latest)
-    context = {
-        'latest_movies':latest_movies,
-    }
-    return JsonResponse(context)
+    return HttpResponse(latest_movies, content_type='application/json')
 
 def popular_movies(request): # 인기 영화 5개
-    popular = Movie.objects.order_by('popularity')[:5]
+    popular = Movie.objects.order_by('-popularity')[:20]
     popular_movies = serializers.serialize('json', popular)
-    context = {
-        'popular_movies':popular_movies,
-    }
-    return JsonResponse(context)
+    return HttpResponse(popular_movies, content_type='application/json')
 
 def today_movies(request): # 오늘의 영화 추천 5개: vote_count >= 15000, vote_average >= 8.0, 평점 순
-    today = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('vote_average')[:5]
+    today = Movie.objects.filter(vote_count__gte=15000, vote_average__gte=8.0).order_by('-vote_average')[:20]
     today_movies = serializers.serialize('json', today)    
-    context = {
-        'today_movies':today_movies,
-    }
-    return JsonResponse(context)
+    return HttpResponse(today_movies, content_type='application/json')
 
 def genre_movies(request):
     # 장르별 영화 추천
@@ -88,14 +53,11 @@ def genre_movies(request):
     genre_movies = []
 
     for key, value in genre.items():
-        movie = Movie.objects.filter(genre_ids=value).order_by('-popularity')[:5]
-        genre_movies.append([key, movie])
+        movie = Movie.objects.filter(genre_ids=value).order_by('-popularity')[:2]
+        genre_movielist = serializers.serialize('json', movie)
+        genre_movies.append({key:genre_movielist})
 
-    genre_movieslist = serializers.serialize('json', genre_movies)
-    context = {
-        'genre_movieslist':genre_movieslist,
-    }
-    return JsonResponse(context)   
+    return HttpResponse(genre_movies, content_type='application/json')
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JSONWebTokenAuthentication])
@@ -148,9 +110,7 @@ def rates_detail(request, rate_pk):
 def search(request):
     search_movie = request.GET.get('search')
     if search_movie:
-        # movies = Movie.objects.filter(Q(title__icontains=search_movie) & Q(original_title__icontains=search_movie) & Q(overview__icontains=search_movie))
-        movies = Movie.objects.filter(Q(title__icontains=search_movie))
-    context = {
-        'movies':movies,
-    }    
-    return render(request, 'movies/index.html', context)
+        # movies = Movie.objects.filter(Q(title__icontains=search_movie))
+        movies = Movie.objects.filter(Q(title__icontains=search_movie) & Q(original_title__icontains=search_movie) & Q(overview__icontains=search_movie))
+        search_movies = serializers.serialize('json', movies)
+        return HttpResponse(search_movies, content_type='application/json')

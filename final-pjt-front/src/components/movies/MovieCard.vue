@@ -6,21 +6,14 @@
           <p class="overview">개봉일 {{ movie.release_date }}</p>
           <p class="overview">평점 {{ movie.vote_average }}</p>
           <p class="overview">{{ movie.title }}</p>
-          <!-- <p class="overview">평점 {{ movie.vote_average }}</p>
-          <p class="overview">개봉일 {{ movie.release_date }}</p> -->
-          <!-- <p class="overview">{{ movie.overview }}</p> -->
         </div>
-        <!-- <b-button @click="saveMovie" class="bt">☆</b-button> -->
       </div>
-    <!-- <b-button @click="[modalShow=!modalShow, saveId()]">이거임</b-button> -->
     <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=savemovies.title class="">
       <div class="d-flex">
         <div class="img_wrap1 hv-1">
           <img :src="'https://image.tmdb.org/t/p/w400/'+ savemovies.poster_path" alt="" class="hv1">
           <p class="overview1" style="width:400px">{{ savemovies.overview }}</p>
         </div>
-        <!-- <div class="w-25 d-flex flex-column p-3">
-        </div> -->
         <div class='ms-4'>
           <!-- 왼쪽이 데이터 오른쪽이 이름 -->
           <ReviewList
@@ -35,13 +28,11 @@
 
 
 <script>
-// import MovieDetail from '@/components/MovieDetail.vue'
 import ReviewList from '@/components/movies/ReviewList.vue'
 
 export default {
   name: 'MovieCard',
   components: {
-    // MovieDetail,
     ReviewList
   },
   data() {
@@ -65,19 +56,6 @@ export default {
     saveId: function () {
       this.$store.dispatch('saveId', this.movie)
     },
-    // getReviews: function () {
-    //   axios({
-    //     method: 'get',
-    //     url: `http://127.0.0.1:8000/movies/movie_list/${this.savemovies[0].id}/rates/`,
-    //     headers: this.setToken()
-    //   })
-    //     .then((response) => {
-    //       this.reviews = response.data
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // },    
   },
   computed: {
     recommendMovie: function () {
@@ -90,12 +68,6 @@ export default {
       return this.$store.state.savetitle
     }
   },
-  // created: function () {
-  //   this.getReviews()
-  // }
-  // created: function () {
-  //   this.$store.dispatch('saveTitle')
-  // },
 }
 </script>
 
@@ -117,10 +89,10 @@ export default {
   .modal-header *{
     color:yellow
   }
-/*   
-  .close {
-    visibility: hidden;
-  } */
+
+  .modal-header .close{
+    color:black
+  }
 
   h5 {
     color: white;
@@ -175,10 +147,6 @@ export default {
   .hv1:hover {
     opacity: 0.5;
   }
-
-  /* .overview1:hover *hv1 {
-    opacity:0.5;
-  } */
 
   .overview1 {
     margin-top: -550px;

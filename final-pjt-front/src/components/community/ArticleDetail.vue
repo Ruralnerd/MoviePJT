@@ -14,7 +14,9 @@
         v-for="(comment, idx) in comments"
         :key="idx"
         :comment="comment"
+        :detail="detail"
       />
+      <!-- <Comment :detail="detail"/> -->
       <div class="p-1">
         <textarea class="form-control" placeholder="댓글" id="floatingContent" v-model="content" style="" @keyup.enter="createComment"></textarea>
       </div>
@@ -25,14 +27,12 @@
 <script>
 import axios from 'axios'
 import Comment from '@/components/community/Comment.vue'
-// import CommentForm from '@/components/community/CommentForm.vue'
 
 
 export default {
   name:'ArticleDetail',
   components: {
     Comment,
-    // CommentForm,
   },
   data () {
     return {
@@ -68,7 +68,6 @@ export default {
         })
     },
     goUpdate: function () {
-      // this.$router.push({path: '/articleupdateform', query:this.detail})
       this.$router.push({ name: 'ArticleUpdateForm' })
     },
     deleteDetail: function () {

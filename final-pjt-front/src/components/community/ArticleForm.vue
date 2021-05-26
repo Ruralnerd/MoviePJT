@@ -61,7 +61,6 @@ export default {
         })
           .then((response) => {
             console.log(response)
-            // 글 작성이 완료되면 어디로 보내줄까?
             this.$router.push({ name: 'Community' })
           })
           .catch((error) => {
