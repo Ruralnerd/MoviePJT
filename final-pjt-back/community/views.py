@@ -16,6 +16,7 @@ def index(request):
         'reviews':reviews
     }
     return render(request, 'community/index.html', context)
+    
 @api_view(['GET', 'POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])

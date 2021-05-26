@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
 
+// import StarRating from 'vue-star-rating'
 
 // bootstrap을 사용하기 위한 코드2
 Vue.use(BootstrapVue)
@@ -33,6 +34,9 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // vue-lodash 사용하기 위한 코드 1
 Vue.use(VueLodash, { name: 'custom' , lodash: lodash })
+
+// Vue.component('star-rating', StarRating)
+
 
 Vue.config.productionTip = false
 

@@ -16,7 +16,7 @@ class Movie(models.Model):
     original_language = models.TextField(blank=True)
     original_title = models.TextField(blank=True)
     title = models.CharField(max_length=150)
-    overview = models.CharField(max_length=254)
+    overview = models.TextField(blank=True)
     popularity = models.FloatField(blank=True)
     poster_path = models.CharField(max_length=255, blank=True)
     release_date = models.DateField(blank=True)

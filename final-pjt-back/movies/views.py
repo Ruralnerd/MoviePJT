@@ -80,6 +80,8 @@ def rates_list(request, movie_pk):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def rates_detail(request, rate_pk):
     rate = get_object_or_404(Rate, pk=rate_pk)
     if request.method == 'GET':

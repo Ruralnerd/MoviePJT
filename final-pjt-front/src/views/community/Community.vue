@@ -51,7 +51,7 @@ export default {
         headers: this.setToken()
       })
         .then((response) => {
-          this.articles = response.data
+          this.articles = response.data.reverse()
         })
         .catch((error) => {
           console.log(error)

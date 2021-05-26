@@ -114,7 +114,7 @@ export default {
             console.log(response)
             this.getComments()
             // 댓글을 작성했으면 댓글창을 초기화하는 코드가 있어야함
-            // ????
+            this.content = null
           })
           .catch((error) => {
             console.log(error)
