@@ -21,10 +21,15 @@ class RateAdmin(admin.ModelAdmin):
     list_display = [
         'user',
         'movie_title',
+        'opinion',
         'star',
         'created_at',
         'updated_at'
     ]
+    # 괄호차이?
+    list_display_links = (
+        'opinion',
+    )
 
     def movie_title(self, obj):
         return obj.movie.title

@@ -9,6 +9,8 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
+from django.db.models import Q
+
 # Create your views here.
 def movie_index(request):
     movies = Movie.objects.all()
@@ -103,9 +105,12 @@ def rates_detail(request, rate_pk):
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-# def search(request):
-#     words = Movie.objects.all() # 영화 정보 불러오기
-#     word = request.GET.get('word','') # GET request의 인자 중에 word갑싱 있으면 가져오고, 없으면 빈 문자열 넣기
-#     if word: # word 값이 있으면
-#         words = words.filter(title__contains=word)
-#     return render(request, 'movies/search.html', {'search':words, 'word':word})
+def search(request):
+    search_movie = request.GET.get('search')
+    if search_movie:
+        # movies = Movie.objects.filter(Q(title__icontains=search_movie) & Q(original_title__icontains=search_movie) & Q(overview__icontains=search_movie))
+        movies = Movie.objects.filter(Q(title__icontains=search_movie))
+    context = {
+        'movies':movies,
+    }    
+    return render(request, 'movies/index.html', context)

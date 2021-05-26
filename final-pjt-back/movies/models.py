@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Genre(models.Model):
@@ -28,7 +29,16 @@ class Movie(models.Model):
 class Rate(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    star = models.IntegerField()
+    star = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
     opinion = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def username(self):
+        return self.user.username
+
+    def movie_title(self):
+        return self.movie.title
+
+    def __str__(self):
+        return f'<{self.movie}> : {self.star}점, {self.opinion}'

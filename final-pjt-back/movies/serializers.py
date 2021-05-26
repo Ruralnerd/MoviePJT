@@ -4,7 +4,7 @@ from .models import Genre, Movie, Rate
 
 class RateSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField()
-
+    movie_title = serializers.ReadOnlyField()
     class Meta:
         model = Rate
         fields = "__all__"
