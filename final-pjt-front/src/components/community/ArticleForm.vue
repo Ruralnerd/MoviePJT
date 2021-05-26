@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container col-sm-6">
-      <div class="p-1">
+      <div class="p-1 mt-5">
         <textarea class="form-control" placeholder="제목" id="floatingTitle" v-model="title" style="height:15px"></textarea>
         <!-- <label for="floatingTextarea">제목</label> -->
         <br>
@@ -12,11 +12,11 @@
       </div>
       <!-- 얘는 본문임 -->
       <div class="p-1">
-        <textarea class="form-control" placeholder="본문" id="floatingContent" v-model="content" style=""></textarea>
+        <textarea class="form-control" placeholder="본문" id="floatingContent" v-model="content" style="height:150px"></textarea>
       </div>
       <br>
       <div class="d-flex flex-row-reverse">
-        <b-button @click="createArticle" class="">작성</b-button>
+        <button type="button" @click="createArticle" class="">작성</button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="container col-sm-10" style="">
-    <h1>커뮤니티 페이지</h1>
+    <h1>자유 게시판</h1>
     <table class="table table-dark table-hover">
       <thead>
         <tr>
@@ -18,7 +18,7 @@
           />
       </tbody>
     </table>    
-    <router-link :to="{ name: 'ArticleForm' }" class="text-decoration-none p-2"><b-button>글쓰기</b-button></router-link>
+    <router-link :to="{ name: 'ArticleForm' }" class="text-decoration-none p-2"><button type="button">글쓰기</button></router-link>
   </div>
 </template>
 

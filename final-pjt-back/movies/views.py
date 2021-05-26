@@ -8,9 +8,21 @@ from .serializers import GenreSerializer, MovieSerializer, RateSerializer
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from django.core import serializers
+from django.http import JsonResponse
 
 from django.db.models import Q
 
+
+def latest_movies(request): # 최신 영화 5개
+    latest = Movie.objects.order_by('-release_date')[:5]
+    latest_movies = serializers.serialize('json', latest)
+    context = {
+        'latest_movies':latest_movies,
+    }
+    return JsonResponse(context)
+
+    
 # Create your views here.
 def movie_index(request):
     movies = Movie.objects.all()

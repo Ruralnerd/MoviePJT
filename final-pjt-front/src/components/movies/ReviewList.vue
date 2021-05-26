@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <h1>Review List Page</h1>
-    <ul>
-      <Review
-        v-for="(review, idx) in reviews"
-        :key="idx"
-        :review="review"
-      />
-    </ul>
-    <!-- <button @click="getReviews"></button> -->
-    <div class="p-1 d-flex align-items-end flex-column">
-      <!-- <textarea class="form-control" placeholder="별점" id="floatingReview" v-model="rating" style="" @keyup.enter="createReview"></textarea> -->
-      <star-rating v-model="star" :star-size="20" :increment="0.5" :show-rating=false></star-rating>
-      <textarea class="form-control" placeholder="리뷰" id="floatingReview" v-model="opinion" style="" @keyup.enter="createReview"></textarea>
+  <div class="container">
+    <div class="d-flex flex-column justify-content-center box">
+    <h1>리뷰 페이지</h1>
+      <ul>
+        <Review
+          v-for="(review, idx) in reviews"
+          :key="idx"
+          :review="review"
+        />
+      </ul>
+      <!-- <button @click="getReviews"></button> -->
+      <div class="p-1 d-flex align-items-end flex-column">
+        <!-- <textarea class="form-control" placeholder="별점" id="floatingReview" v-model="rating" style="" @keyup.enter="createReview"></textarea> -->
+        <star-rating v-model="star" :star-size="20" :increment="0.5" :show-rating=false></star-rating>
+        <textarea class="form-control mt-1" placeholder="리뷰" id="floatingReview" v-model="opinion" style="" @keyup.enter="createReview"></textarea>
+    </div>
     </div>    
   </div>
 </template>
@@ -96,5 +98,8 @@ export default {
 </script>
 
 <style>
+ .box {
+   border: 5px solid red;
+ }
 
 </style>

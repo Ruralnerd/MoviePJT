@@ -3,17 +3,18 @@ from rest_framework import serializers
 from .models import Review, Comment
 
 class CommentSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
-    updated_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
+    # created_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
+    # updated_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
 
     class Meta:
         model = Comment
-        fields = "__all__"
+        # fields = "__all__"
+        exclude = ('created_at', 'updated_at')
 
 
 class ReviewListSerializer(serializers.ModelSerializer):
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
-    created_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
+    # created_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
     class Meta:
         model = Review
         fields = ('id', 'title', 'created_at', 'movie_title', 'content', 'comment_count')
@@ -22,8 +23,8 @@ class ReviewListSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField()
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
-    created_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
-    updated_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
+    # created_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
+    # updated_at = serializers.DateTimeField(format='%Y.%m.%d %H:%M')
     
     class Meta:
         model = Review

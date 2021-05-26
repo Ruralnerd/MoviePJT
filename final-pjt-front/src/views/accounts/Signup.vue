@@ -1,11 +1,11 @@
 <template>
-  <div class="container box bg-light w-50 col-sm-2 mt-3">
+  <div class="container w-50 col-sm-2 mt-3">
     <div class="bg1 p-5">
       <b-form class="">
-      <h1 class="p-3">Sign up page</h1>
+      <h1 class="p-3">회원가입</h1>
       <!-- 아이디 -->
       <b-form-group id="input-group-1" label="아이디" label-for="username" class="text-start">
-        <b-form-input id="username" v-model="credentials.username" type="text" placeholder="ID를 입력해 주세요." class=""></b-form-input>
+        <b-form-input id="username" v-model="credentials.username" type="text" placeholder="아이디를 입력해 주세요." class=""></b-form-input>
       </b-form-group>
       <br>
       <!-- 비밀번호 -->
@@ -19,7 +19,7 @@
       </b-form-group>
       <br>
       <!-- 회원가입 버튼 -->
-      <button type="button" class="btn bg-light" @click="signup(credentials)">회원가입</button>
+      <button type="button" class="btn bg-light" @click="signup(credentials)">가입</button>
       </b-form>
     </div>
   </div>
@@ -62,9 +62,9 @@ export default {
 </script>
 
 <style>
-.box {
-  border: 2px solid black;
+/* .box {
+  border: 2px hidden solid;
   border-radius: 5px;
-}
+} */
 
 </style>

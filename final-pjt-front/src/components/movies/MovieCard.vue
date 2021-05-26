@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-      <div class="carousel-item p-0 img_wrap">
+  <div class="">
+      <div class="carousel-item p-0 img_wrap" style="background-color: rgba( 255, 255, 255, 0.5 );">
         <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid hv" style="height:700px; width:500px" alt="..." @click="[saveId(), modalShow=!modalShow]">
         <div class="container d-flex flex-column">
           <p class="overview">개봉일 {{ movie.release_date }}</p>
@@ -10,7 +10,7 @@
           <p class="overview">개봉일 {{ movie.release_date }}</p> -->
           <!-- <p class="overview">{{ movie.overview }}</p> -->
         </div>
-        <b-button @click="saveMovie" class="bt">☆</b-button>
+        <!-- <b-button @click="saveMovie" class="bt">☆</b-button> -->
       </div>
     <!-- <b-button @click="[modalShow=!modalShow, saveId()]">이거임</b-button> -->
     <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=savemovies.title class="">
@@ -113,6 +113,10 @@ export default {
   .modal-header {
     background-color: black;
   }
+
+  .modal-header *{
+    color:yellow
+  }
 /*   
   .close {
     visibility: hidden;
@@ -141,6 +145,7 @@ export default {
     visibility: hidden;
     opacity: 0;
     font-size: 40px;
+    color: gold;
   }
 
   .img_wrap:hover .overview {
@@ -160,6 +165,8 @@ export default {
     font-size: 40px;
   }
 
+
+
   .img_wrap1:hover .overview1 {
     visibility: visible;
     opacity: 1;
@@ -168,6 +175,10 @@ export default {
   .hv1:hover {
     opacity: 0.5;
   }
+
+  /* .overview1:hover *hv1 {
+    opacity:0.5;
+  } */
 
   .overview1 {
     margin-top: -550px;
@@ -190,5 +201,23 @@ export default {
   .bt {
     position: relative;
     padding-right: 200px;
+  }
+
+  #carousel-1 > .carousel-control-next {
+    opacity: 1;
+    /* background-color: rgba( 255, 255, 255, 0.5 ); */
+    background-color: black;
+    color:red;
+    /* visibility: hidden; */
+    /* opacity: 0; */
+  }
+
+  #carousel-1 >  .carousel-control-prev {
+    opacity: 1;
+    /* background-color: rgba( 255, 255, 255, 0.5 ); */
+    background-color: black;
+    color:red;
+    /* visibility: hidden; */
+    /* opacity: 0; */
   }
 </style>

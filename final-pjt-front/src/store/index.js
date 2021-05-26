@@ -11,7 +11,8 @@ export default new Vuex.Store({
     movies:[],
     mymovies:[],
     removies:[],
-    savemovies:'',
+    savemovies: null,
+    latestmovies: null,
     
     // savetitle:[],
   },
@@ -26,6 +27,10 @@ export default new Vuex.Store({
       // state.movies.push(movies)
       state.movies = movies
     },
+    GET_LATEST: function(state, movies) {
+      // state.movies.push(movies)
+      state.latestmovies = movies
+    },
     // SAVE_TITLE: function(state, movie) {
     //   state.savetitle.push(movie)
     // }
@@ -37,6 +42,7 @@ export default new Vuex.Store({
     saveId: function({ commit }, movie) {
       commit('SAVE_ID', movie)
     },
+
     getMovies: function({ commit }) {
       axios({
         method: 'get',
@@ -47,6 +53,19 @@ export default new Vuex.Store({
           commit('GET_MOVIES', response.data)
         })
     },
+
+    getLatest: function({ commit }) {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/movies/recommend/latest_movies/'
+      })
+        .then((response) => {
+          console.log(response)
+          commit('GET_LATEST', response.data)
+        })
+    },
+
+
     // saveTitle: function({ commit }, movie) {
     //   commit('SAVE_TITLE', movie)
     // }

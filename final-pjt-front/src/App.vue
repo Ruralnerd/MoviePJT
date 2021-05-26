@@ -1,14 +1,14 @@
 <template>
     <div class="bg">
-      <div class="container">
+      <div class="">
         <div id="app" class="">
           <div id="nav" class="">
-            <b-navbar type="light" variant="dark">
+            <b-navbar type="light" variant="" style="background-color:#4B0082">
               <b-navbar-nav>
-                <router-link :to="{ name: 'Main' }" class="text-decoration-none p-2 ps-3">Main</router-link>
-                <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2">Recommended</router-link>
-                <router-link v-if="isSignin" :to="{ name: 'MyMovieList' }" class="text-decoration-none p-2">My Movie List</router-link>
-                <router-link :to="{ name: 'Community' }" class="text-decoration-none p-2">Community</router-link>
+                <router-link :to="{ name: 'Main' }" class="text-decoration-none p-2 px-4">메인</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2 px-4">추천영화</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'MyMovieList' }" class="text-decoration-none p-2 px-4">My Movie List</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'Community' }" class="text-decoration-none p-2 px-4">게시판</router-link>
               </b-navbar-nav>
 
               <b-navbar-nav class="ml-auto">
@@ -19,12 +19,12 @@
 
                 <b-nav-item-dropdown right>
                   <template #button-content>
-                    <span class="p-2">User</span>
+                    <span class="p-2 px-4">회원</span>
                   </template>
-                  <span v-if="isSignin"><b-dropdown-item :to="{ name: 'Signout' }" class="text-decoration-none" @click.native="signout">Sign out</b-dropdown-item></span>
+                  <span v-if="isSignin"><b-dropdown-item :to="{ name: 'Signout' }" class="text-decoration-none" @click.native="signout">로그-아웃</b-dropdown-item></span>
                   <span v-else>
-                    <b-dropdown-item :to="{ name: 'Signup' }" class="text-decoration-none">Sign up</b-dropdown-item>
-                    <b-dropdown-item :to="{ name: 'Signin' }" class="text-decoration-none">Sign in</b-dropdown-item>
+                    <b-dropdown-item :to="{ name: 'Signup' }" class="text-decoration-none">회원가입</b-dropdown-item>
+                    <b-dropdown-item :to="{ name: 'Signin' }" class="text-decoration-none">로그-인</b-dropdown-item>
                   </span>
                 </b-nav-item-dropdown>
               </b-navbar-nav>
@@ -87,12 +87,12 @@ export default {
 #nav a {
   font-weight: bold;
   /* color: #2c3e50; */
-  color: darksalmon;
+  color:yellow;
   
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: blue;
 }
 .bg {
   min-height: 100vh;
@@ -106,5 +106,8 @@ export default {
   /* background-position: center; */
 }
 
+.nav-item > .show {
+  background-color:black;
+}
 
 </style>

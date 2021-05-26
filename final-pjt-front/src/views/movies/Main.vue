@@ -11,7 +11,7 @@
         background="#000000"
         img-width="600"
         img-height="600"
-        style="text-shadow: 3px 3px 10px #00f;"
+        style="text-shadow: 3px 3px 10px #ff4500;"
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
       >
@@ -22,7 +22,14 @@
         />
     </b-carousel>
     <h1>장르별 추천영화</h1>
-    
+    <button type="button" @click='check'>체크용</button>
+      <!-- <p>{{latestmovies}}</p> -->
+      <ul>
+        <!-- <li v-for="(latestmovie, idx) in JSON.parse(this.latestmovies['latest_movies'])" :key="idx"> -->
+              <!-- console.log(JSON.parse(this.latestmovies['latest_movies'])[0]['fields']['title']) -->
+          <!-- <p>{{latestmovie[0]['fields']['title']}}</p> -->
+        <!-- </li> -->
+      </ul>
 
     <h1>요즘 뜨는 영화</h1>
   </div>
@@ -48,6 +55,7 @@ export default {
   },
   created: function () {
     this.$store.dispatch('getMovies')
+    this.$store.dispatch('getLatest')
   },
   computed: {
     // movies: function () {
@@ -55,9 +63,15 @@ export default {
     // },
     ...mapState([
       'movies',
+      'latestmovies'
     ])
   },
   methods: {
+    check() {
+      // console.log(this.latestmovies)
+      // console.log(JSON.parse(this.latestmovies['latest_movies'])[0]['fields']['title'])
+      console.log(this.latestmovies)
+    },
     onSlideStart() {
       this.sliding = true
     },
@@ -84,5 +98,6 @@ export default {
   .carousel-control-next {
     opacity: 1;
     background-color: red;
+    color:red;
   }
 </style>
