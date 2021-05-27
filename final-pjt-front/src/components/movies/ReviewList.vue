@@ -2,6 +2,7 @@
   <div class="container" style="">
     <div class="d-flex flex-column">
     <h1 class="text-center">리뷰 페이지</h1>
+    <!-- <h2>{{movie.id}}</h2> -->
       <ul>
         <Review
           v-for="(review, idx) in reviews"
@@ -32,6 +33,9 @@ export default {
   props: {
     savemovies: {
       type:Object,
+    },
+    movie: {
+      type:Object
     }
   },
   data: function () {
@@ -82,7 +86,8 @@ export default {
             this.getReviews()
             this.opinion = null
             this.star = null
-            console.log(this.savemovies.genre_ids)
+            // console.log(this.savemovies.genre_ids)
+            this.$store.dispatch('rmovie', this.movie)
           })
           .catch((error) => {
             console.log(error)
@@ -102,7 +107,10 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-    }
+    },
+    rmovie: function () {
+      this.$store.dispatch('rmovie', this.movie)
+    },
   },
   created: function () {
     this.getReviews()

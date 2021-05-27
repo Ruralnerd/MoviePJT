@@ -1,7 +1,7 @@
 <template>
   <div class="">
       <div class="carousel-item p-0 img_wrap" style="">
-        <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid hv" style="height:700px; width:500px" alt="..." @click="[modalShow=!modalShow]">
+        <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid hv" style="height:700px; width:500px" alt="..." @click="[saveId(), modalShow=!modalShow]">
         <div class="container d-flex flex-column">
           <p class="overview">개봉일 {{ movie.release_date }}</p>
           <p class="overview">평점 {{ movie.vote_average }}</p>
@@ -17,6 +17,7 @@
         <div class='ms-4' style="flex:1;">
           <ReviewList
             :savemovies="savemovies"
+            :movie="movie"
           />
         </div>
       </div>

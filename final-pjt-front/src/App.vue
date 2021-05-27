@@ -39,7 +39,7 @@
         <router-view @signin="isSignin=true"/>
       </div>
     </div>
-  <div class="container">
+  <div class="container" v-if='$route.name === "Search"'>
     <h1>Recommended Movie List</h1>
       <div class="row row-cols-3 row-cols-md-3 g-3">
         <Search

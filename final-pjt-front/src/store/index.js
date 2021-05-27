@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     movies:[],
     mymovies:[],
-    removies:[],
+    rmovie:[],
     updatearticle:null,
     savemovietitles:null,
     savemovies: [],
@@ -41,7 +41,10 @@ export default new Vuex.Store({
     },
     ARTICLE_UPDATE: function(state, detail) {
       state.updatearticle = detail
-    }
+    },
+    R_MOVIE: function(state, movie) {
+      state.rmovie = movie
+    },
   },
   actions: {
     saveMovie: function({ commit }, movie) {
@@ -49,6 +52,9 @@ export default new Vuex.Store({
     },
     saveId: function({ commit }, movie) {
       commit('SAVE_ID', movie)
+    },
+    rmovie: function({ commit }, movie) {
+      commit('R_MOVIE', movie)
     },
     articleUpdate: function({ commit }, detail) {
       commit('ARTICLE_UPDATE', detail)

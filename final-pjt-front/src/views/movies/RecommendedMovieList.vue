@@ -7,7 +7,8 @@
         :key="idx"
         :recommend="recommend"  
       />
-      
+      <!-- <p>zzz{{savemovies.id}}</p> -->
+      <!-- <p>{{rmovie}}</p> -->
     </div>      
   </div>
 </template>
@@ -31,16 +32,19 @@ export default {
     savemovies: function () {
       return this.$store.state.savemovies
     },
+    rmovie: function () {
+      return this.$store.state.rmovie
+    },
   },
   methods: {
     getRecommend: function () {
       axios({
         method: 'get',
-        url: `https://api.themoviedb.org/3/movie/${this.savemovies.id}/recommendations?api_key=1850c79236f1a6c5846dc306a959dc25&language=ko-KR&page=1`,
+        url: `https://api.themoviedb.org/3/movie/${this.rmovie.id}/recommendations?api_key=1850c79236f1a6c5846dc306a959dc25&language=ko-KR&page=1`,
       })
         .then((response) => {
           this.recommends = response.data['results']
-          console.log(this.recommends)
+          // console.log(this.recommends)
         })
         .catch((error) => {
           console.log(error)

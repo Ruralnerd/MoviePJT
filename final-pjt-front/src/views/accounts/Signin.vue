@@ -37,11 +37,13 @@ export default {
   methods: {
     signin: function () {
       axios({
+        
         method: 'post',
         url: 'http://127.0.0.1:8000/accounts/api-token-auth/',
         data: this.credentials
       })
         .then(response => {
+          this.$emit('signin')
           console.log(response)
           localStorage.setItem('jwt', response.data.token)
           this.$router.push({ name: 'Main' })
