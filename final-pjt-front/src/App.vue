@@ -5,11 +5,14 @@
         <div id="nav" class="" v-if='$route.name !== "Cover"'>
           <b-navbar type="light" variant="" style="background-color:#4B0082">
             <b-navbar-nav>
-              <router-link v-if="isSignin" :to="{ name: 'Main' }" class="text-decoration-none p-2 px-4">메인</router-link>
-              <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2 px-4">추천영화</router-link>
-              <router-link v-if="isSignin" :to="{ name: 'YoutubeSearch' }" class="text-decoration-none p-2 px-4">최신기술</router-link>
-              <router-link v-if="isSignin" :to="{ name: 'Community' }" class="text-decoration-none p-2 px-4">게시판</router-link>
-              <router-link v-if="isSignin" :to="{ name: 'Search' }" class="text-decoration-none p-2 px-4">검색결과</router-link>
+              <img class="" src="https://mblogthumb-phinf.pstatic.net/MjAxNzEyMDlfMTE5/MDAxNTEyODI0NDcyMzAx.yDY3b9FS-47OcrouwTG2GpGGrL35sfZmNuPuOeL4wZcg.E6OGSOulkuHcsas8163TjSOz7BB-_e5rabkNHQgA_E8g.GIF.482618/mario_emoticon_by_tylerjbeck-d56z8u9.gif?type=w800" alt="" style="height:50px;cursor:help">
+              <div class="d-flex align-items-center">
+                <router-link v-if="isSignin" :to="{ name: 'Main' }" class="text-decoration-none p-2 px-4">메인</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2 px-4">추천영화</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'YoutubeSearch' }" class="text-decoration-none p-2 px-4">최신기술</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'Community' }" class="text-decoration-none p-2 px-4">게시판</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'Search' }" class="text-decoration-none p-2 px-4">검색결과</router-link>
+              </div>
             </b-navbar-nav>
               <b-navbar-nav class="mm">
                 <b-nav-form class="d-flex align-items-center">
@@ -38,8 +41,8 @@
         <router-view @signin="isSignin=true"/>
       </div>
     </div>
-  <div class="container" v-if='$route.name === "Search"'>
-    <h1 class="text-center mb-3 mt-4">검색 결과</h1>
+    <div class="container" v-if='$route.name === "Search"'>
+      <h1 class="text-center mb-3 mt-4">검색 결과</h1>
       <div class="row row-cols-3 row-cols-md-3 g-3">
         <Search
           v-for="(result, idx) in ans"
@@ -47,8 +50,12 @@
           :result="result"
           :cat="cat"
         />
-      </div>      
-  </div>
+      </div>
+      <div v-if='ans.length < 1' class='d-flex flex-column mt-5 align-items-center justify-content-center'>
+        <h1 class="text-center mt-5 w-50 justify-content-center">검색된 결과가 없습니다.</h1>
+        <img src="https://i.imgur.com/OMkhkK6.gif" alt="">
+      </div> 
+    </div>
   </div>
 </template>
 
@@ -79,18 +86,6 @@ export default {
     backback: function () {
       this.$router.go(-1)
     },
-    getCat: function () {
-      axios({
-        metod: 'get',
-        url: 'https://api.thecatapi.com/v1/images/search'
-      })
-      .then((response) => {
-        this.cat = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    },
     getSearch: function () {
       axios({
         method: 'get',
@@ -104,7 +99,21 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-    }    
+    },
+    getCat: function () {
+      if (this.ans.length === 0) {
+        axios({
+          metod: 'get',
+          url: 'https://api.thecatapi.com/v1/images/search'
+        })
+        .then((response) => {
+          this.cat = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      }
+    },
   },
   created: function () {
     const token = localStorage.getItem('jwt')

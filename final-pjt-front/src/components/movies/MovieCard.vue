@@ -1,14 +1,14 @@
 <template>
   <div class="">
       <div class="carousel-item p-0 img_wrap" style="">
-        <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid hv" style="height:700px; width:500px" alt="..." @click="[saveId(), modalShow=!modalShow]">
+        <img :src="'https://image.tmdb.org/t/p/w500/'+ movie.poster_path" class="image-fluid hv" style="height:800px; width:600px" alt="..." @click="[saveId(), modalShow=!modalShow]">
         <div class="container d-flex flex-column">
           <p class="overview">개봉일 {{ movie.release_date }}</p>
           <p class="overview">평점 {{ movie.vote_average }}</p>
           <p class="overview">{{ movie.title }}</p>
         </div>
       </div>
-    <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=movie.title class="">
+    <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=movie.title class="fs" style="">
       <div class="d-flex">
         <div class="img_wrap1 hv-1">
           <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" alt="" class="hv1">
@@ -20,6 +20,9 @@
             :movie="movie"
           />
         </div>
+      </div>
+      <div class="ab">
+        <p>포스터 위에 마우스를 올려 보세요.</p>
       </div>
     </b-modal>
   <!-- 왼쪽이 데이터 오른쪽이 이름 -->
@@ -69,6 +72,20 @@ export default {
 </script>
 
 <style>
+  #modal-lg___BV_modal_content_ {
+    border: 2px solid white;
+  }
+
+  .modal-title {
+    font-size: 23px;
+  }
+
+  .ab {
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 220px;
+    font-size: 20px;
+  }
   .pos {
     margin-left: 210px;
     margin-bottom: 100px;

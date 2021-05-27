@@ -12,7 +12,7 @@
           background="#000000"
           img-width="600"
           img-height="600"
-          style="text-shadow: 3px 3px 10px #ff4500;"
+          style="text-shadow: 3px 3px 10px #ff4500; cursor:pointer"
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >

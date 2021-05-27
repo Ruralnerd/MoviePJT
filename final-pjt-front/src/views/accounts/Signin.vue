@@ -10,7 +10,7 @@
         <br>
         <!-- 비밀번호 -->
         <b-form-group id="input-group-2" label="비밀번호" label-for="password" class="text-start">
-          <b-form-input id="password" v-model="credentials.password" maxlength="12" type="password" placeholder="●●●●●●●●"></b-form-input>
+          <b-form-input id="password" v-model="credentials.password" maxlength="12" type="password" placeholder="●●●●●●●●" @keyup.enter="signin"></b-form-input>
         </b-form-group>
         <br>
         <!-- 로그인 버튼 -->
