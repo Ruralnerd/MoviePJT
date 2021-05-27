@@ -31,7 +31,7 @@ export default {
   name: 'ArticleUpdateForm',
   data: function () {
     return {
-      updatetitle: null,
+      updatetitle: this.updatearticle.title,
       updatemovie_title: null,
       updatecontent: null,
     }
@@ -48,9 +48,6 @@ export default {
         Authorization: `JWT ${token}`
       }
       return config
-    },
-    getDetail: function () {
-      
     },
     // 장고로 신호 쏴줘야해 ..
     updateDetail: function () {
