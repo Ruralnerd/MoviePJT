@@ -1,62 +1,71 @@
 <template>
-    <div class="bg">
-      <div class="">
-        <div id="app" class="">
-          <div id="nav" class="">
-            <b-navbar type="light" variant="" style="background-color:#4B0082">
-              <b-navbar-nav>
-                <router-link :to="{ name: 'Main' }" class="text-decoration-none p-2 px-4">메인</router-link>
-                <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2 px-4">추천영화</router-link>
-                <router-link v-if="isSignin" :to="{ name: 'YoutubeSearch' }" class="text-decoration-none p-2 px-4">최신기술</router-link>
-                <router-link v-if="isSignin" :to="{ name: 'Community' }" class="text-decoration-none p-2 px-4">게시판</router-link>
-                <router-link v-if="isSignin" :to="{ name: 'Search' }" class="text-decoration-none p-2 px-4">검색결과</router-link>
-              </b-navbar-nav>
-              <!-- <div class='box1 mm'> -->
-                <b-navbar-nav class="mm">
-                  <b-nav-form class="d-flex align-items-center">
-                    <div class="box1">
-                      <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="inputText" @keyup.enter="getSearch"></b-form-input>
-                    </div>
-                    <div class="box2">
-                      <button size="sm" class="my-2 my-sm-0 ms-1" type="button" @click="getSearch">Search</button>
-                    </div>
-                  </b-nav-form>
+  <div class="bg">
+    <div class="">
+      <div id="app" class="">
+        <div id="nav" class="">
+          <b-navbar type="light" variant="" style="background-color:#4B0082">
+            <b-navbar-nav>
+              <router-link :to="{ name: 'Main' }" class="text-decoration-none p-2 px-4">메인</router-link>
+              <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2 px-4">추천영화</router-link>
+              <router-link v-if="isSignin" :to="{ name: 'YoutubeSearch' }" class="text-decoration-none p-2 px-4">최신기술</router-link>
+              <router-link v-if="isSignin" :to="{ name: 'Community' }" class="text-decoration-none p-2 px-4">게시판</router-link>
+              <router-link v-if="isSignin" :to="{ name: 'Search' }" class="text-decoration-none p-2 px-4">검색결과</router-link>
+            </b-navbar-nav>
+            <!-- <div class='box1 mm'> -->
+              <b-navbar-nav class="mm">
+                <b-nav-form class="d-flex align-items-center">
+                  <div class="box1">
+                    <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="inputText" @keydown.enter.prevent="getSearch"></b-form-input>
+                  </div>
+                  <div class="box2">
+                    <button size="sm" class="my-2 my-sm-0 ms-1" type="button" @click="getSearch">Search</button>
+                  </div>
+                </b-nav-form>
 
-                  <b-nav-item-dropdown right>
-                    <template #button-content>
-                      <span class="p-2 px-4">회원</span>
-                    </template>
-                    <span v-if="isSignin"><b-dropdown-item class="text-decoration-none" @click.native="signout">로그-아웃</b-dropdown-item></span>
-                    <span v-else>
-                      <b-dropdown-item :to="{ name: 'Signup' }" class="text-decoration-none">회원가입</b-dropdown-item>
-                      <b-dropdown-item :to="{ name: 'Signin' }" class="text-decoration-none">로그-인</b-dropdown-item>
-                    </span>
-                  </b-nav-item-dropdown>
-                </b-navbar-nav>
-              <!-- </div> -->
-            </b-navbar>
-          </div>
-          <router-view @signin="isSignin=true"/>
+                <b-nav-item-dropdown right>
+                  <template #button-content>
+                    <span class="p-2 px-4">회원</span>
+                  </template>
+                  <span v-if="isSignin"><b-dropdown-item class="text-decoration-none" @click.native="signout">로그-아웃</b-dropdown-item></span>
+                  <span v-else>
+                    <b-dropdown-item :to="{ name: 'Signup' }" class="text-decoration-none">회원가입</b-dropdown-item>
+                    <b-dropdown-item :to="{ name: 'Signin' }" class="text-decoration-none">로그-인</b-dropdown-item>
+                  </span>
+                </b-nav-item-dropdown>
+              </b-navbar-nav>
+            <!-- </div> -->
+          </b-navbar>
         </div>
+        <router-view @signin="isSignin=true"/>
       </div>
-    <!-- <Search :results="results"/> -->
     </div>
+  <div class="container">
+    <h1>Recommended Movie List</h1>
+      <div class="row row-cols-3 row-cols-md-3 g-3">
+        <Search
+          v-for="(result, idx) in ans"
+          :key="idx"
+          :result="result"
+        />
+      </div>      
+  </div>
+  </div>
 </template>
 
 
 <script>
 import axios from 'axios'
-// import Search from '@/views/movies/Search.vue'
+import Search from '@/views/movies/Search.vue'
 
 export default {
   name: 'App',
   components: {
-    // Search
+    Search
   },
   data: function () {
     return {
       isSignin: false,
-      results: null,
+      ans: [],
       inputText: null,
     }
   },
@@ -79,9 +88,10 @@ export default {
         // headers: this.setToken()
       })
         .then((response) => {
-          this.results = response.data
+          this.ans = response.data['results']
           // console.log(response)
           // console.log(response.data)
+          this.inputText = ''
           this.$router.push({ name: 'Search' })
         })
         .catch((error) => {

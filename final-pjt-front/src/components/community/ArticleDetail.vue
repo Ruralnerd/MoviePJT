@@ -69,6 +69,7 @@ export default {
         })
     },
     goUpdate: function () {
+      this.$store.dispatch('articleUpdate', this.detail)
       this.$router.push({ name: 'ArticleUpdateForm' })
     },
     deleteDetail: function () {

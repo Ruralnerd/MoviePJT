@@ -1,33 +1,45 @@
 <template>
   <div>
-    <h1>글쓰는 곳임</h1>
-    <div class="container col-sm-4">
-      <div class="p-1">
-        <textarea class="form-control" placeholder="제목" id="floatingTitle" v-model="title" style="height:15px"></textarea>
+    <div class="container col-sm-6 mt-4 px-5">
+      <h1 class="text-start px-3">글쓰기</h1>
+      <div class="input-group mb-3 p-3">
+        <span class="input-group-text">제목</span>
+        <input type="text" class="form-control" :placeholder=updatearticle.title v-model="updatetitle" maxlength="31" aria-label="title">
+        <br>
       </div>   
-      <div class="p-1">
-        <textarea class="form-control" placeholder="영화 제목" id="floatingMovieTitle" v-model="movie_title" style="height:15px"></textarea>
+      <div class="input-group mb-3 px-3">
+        <span class="input-group-text">영화</span>
+        <input type="text" class="form-control" :placeholder=updatearticle.movie_title v-model="updatemovie_title" maxlength="31" aria-label="movie_title">
+        <br>
+      </div>   
+      <div class="p-3">
+        <textarea class="form-control" :placeholder=updatearticle.content id="floatingContent" v-model="updatecontent" maxlength="279" style="height:150px"></textarea>
       </div>
-      <!-- 얘는 본문임 -->
-      <div class="p-1">
-        <textarea class="form-control" placeholder="본문" id="floatingContent" v-model="content" style=""></textarea>
+      <br>
+      <div class="d-flex flex-row-reverse px-3">
+        <button type="button" @click="updateDetail" class="">수정</button>
       </div>
-      <b-button @click="updateDetail">수정</b-button>
-    </div>
+    </div>    
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 export default {
   name: 'ArticleUpdateForm',
   data: function () {
     return {
-      title: '',
-      movie_title: '',
-      content: '',
+      updatetitle: null,
+      updatemovie_title: null,
+      updatecontent: null,
     }
+  },
+  computed: {
+    ...mapState([
+      'updatearticle',
+    ])
   },
   methods: {
     setToken: function () {
@@ -43,19 +55,20 @@ export default {
     // 장고로 신호 쏴줘야해 ..
     updateDetail: function () {
       const Article = {
-        title: this.title,
-        content: this.content,
-        movie_title: this.movie_title,
+        title: this.updatetitle,
+        content: this.updatecontent,
+        movie_title: this.updatemovie_title,
+        user: this.updatearticle.user
       }
-
       axios({
         method: 'put',
-        url: `http://127.0.0.1:8000/community/review/${this.id}/`,
+        url: `http://127.0.0.1:8000/community/review/${this.updatearticle.id}/`,
         data:Article,
         headers: this.setToken(),
       })
         .then((response) => {
           console.log(response)
+          this.$router.push({ name: 'Community' })
         })
         .catch((error) => {
           console.log(error)

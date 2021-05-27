@@ -11,8 +11,9 @@ export default new Vuex.Store({
     movies:[],
     mymovies:[],
     removies:[],
+    updatearticle:null,
     savemovietitles:null,
-    savemovies: [1],
+    savemovies: [],
     latestmovies: null,
     popularmovies: null,
     todaymovies: null,
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     GET_TODAY: function(state, movies) {
       state.todaymovies = movies
     },
+    ARTICLE_UPDATE: function(state, detail) {
+      state.updatearticle = detail
+    }
   },
   actions: {
     saveMovie: function({ commit }, movie) {
@@ -45,6 +49,9 @@ export default new Vuex.Store({
     },
     saveId: function({ commit }, movie) {
       commit('SAVE_ID', movie)
+    },
+    articleUpdate: function({ commit }, detail) {
+      commit('ARTICLE_UPDATE', detail)
     },
     getMovies: function({ commit }) {
       const ck = localStorage.getItem('vuex')

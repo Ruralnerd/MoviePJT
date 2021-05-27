@@ -52,7 +52,7 @@ def review_detail(request, review_pk):
     elif request.method == 'PUT':
         serializer = ReviewSerializer(review, data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(user=request.user)
             return Response(serializer.data)
 
 

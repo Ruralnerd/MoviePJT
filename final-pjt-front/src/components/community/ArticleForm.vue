@@ -12,7 +12,6 @@
         <input type="text" class="form-control" placeholder="영화 제목을 입력하세요." v-model="movie_title" maxlength="31" aria-label="movie_title">
         <br>
       </div>   
-      <!-- 얘는 본문임 -->
       <div class="p-3">
         <textarea class="form-control" placeholder="" id="floatingContent" v-model="content" maxlength="279" style="height:150px"></textarea>
       </div>
