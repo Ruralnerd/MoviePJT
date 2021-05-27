@@ -4,6 +4,7 @@ import Cover from '../views/Cover.vue'
 import Main from '../views/movies/Main.vue'
 import RecommendedMovieList from '../views/movies/RecommendedMovieList.vue'
 import YoutubeSearch from '../views/movies/YoutubeSearch.vue'
+import Search from '../views/movies/Search.vue'
 
 import Community from '../views/community/Community.vue'
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/youtubesearch',
     name: 'YoutubeSearch',
     component: YoutubeSearch
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
   {
     path: '/community',

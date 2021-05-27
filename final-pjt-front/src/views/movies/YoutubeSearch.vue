@@ -1,5 +1,5 @@
 <template>
-  <div class="container col-sm-8 mt-5">
+  <div class="container col-sm-8 mt-5 bg-light">
       <textarea
         class="form-control mb-5"
         placeholder="검색어를 입력해 주세요."
@@ -7,6 +7,7 @@
         style="height:15px;"
         @keyup.enter="check"
       ></textarea>
+      <h3>{{ video }}</h3>
       <iframe width="100%" height="600px" :src="'https://www.youtube.com/embed/'+ video" frameborder="0"></iframe>
   </div>
 </template>
@@ -50,7 +51,8 @@ export default {
       })
         .then(res => {
           this.inputText = ''
-          this.video = res.data.items[0].id['videoId']
+          // this.video = res.data.items[0].id['videoId']
+          this.video = res.data
         })
         .catch(err => console.log(err))
     },

@@ -9,40 +9,55 @@
                 <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2 px-4">추천영화</router-link>
                 <router-link v-if="isSignin" :to="{ name: 'YoutubeSearch' }" class="text-decoration-none p-2 px-4">최신기술</router-link>
                 <router-link v-if="isSignin" :to="{ name: 'Community' }" class="text-decoration-none p-2 px-4">게시판</router-link>
+                <router-link v-if="isSignin" :to="{ name: 'Search' }" class="text-decoration-none p-2 px-4">검색결과</router-link>
               </b-navbar-nav>
+              <!-- <div class='box1 mm'> -->
+                <b-navbar-nav class="mm">
+                  <b-nav-form class="d-flex align-items-center">
+                    <div class="box1">
+                      <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="inputText" @keyup.enter="getSearch"></b-form-input>
+                    </div>
+                    <div class="box2">
+                      <button size="sm" class="my-2 my-sm-0 ms-1" type="button" @click="getSearch">Search</button>
+                    </div>
+                  </b-nav-form>
 
-              <b-navbar-nav class="ml-auto">
-                <b-nav-form class="">
-                  <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                  <button size="sm" class="my-2 my-sm-0" type="button">Search</button>
-                </b-nav-form>
-
-                <b-nav-item-dropdown right>
-                  <template #button-content>
-                    <span class="p-2 px-4">회원</span>
-                  </template>
-                  <span v-if="isSignin"><b-dropdown-item class="text-decoration-none" @click.native="signout">로그-아웃</b-dropdown-item></span>
-                  <span v-else>
-                    <b-dropdown-item :to="{ name: 'Signup' }" class="text-decoration-none">회원가입</b-dropdown-item>
-                    <b-dropdown-item :to="{ name: 'Signin' }" class="text-decoration-none">로그-인</b-dropdown-item>
-                  </span>
-                </b-nav-item-dropdown>
-              </b-navbar-nav>
+                  <b-nav-item-dropdown right>
+                    <template #button-content>
+                      <span class="p-2 px-4">회원</span>
+                    </template>
+                    <span v-if="isSignin"><b-dropdown-item class="text-decoration-none" @click.native="signout">로그-아웃</b-dropdown-item></span>
+                    <span v-else>
+                      <b-dropdown-item :to="{ name: 'Signup' }" class="text-decoration-none">회원가입</b-dropdown-item>
+                      <b-dropdown-item :to="{ name: 'Signin' }" class="text-decoration-none">로그-인</b-dropdown-item>
+                    </span>
+                  </b-nav-item-dropdown>
+                </b-navbar-nav>
+              <!-- </div> -->
             </b-navbar>
           </div>
           <router-view @signin="isSignin=true"/>
         </div>
       </div>
+    <!-- <Search :results="results"/> -->
     </div>
 </template>
 
 
 <script>
+import axios from 'axios'
+// import Search from '@/views/movies/Search.vue'
+
 export default {
   name: 'App',
+  components: {
+    // Search
+  },
   data: function () {
     return {
       isSignin: false,
+      results: null,
+      inputText: null,
     }
   },
   methods: {
@@ -50,7 +65,29 @@ export default {
       this.isSignin = false
       localStorage.removeItem('jwt')
       this.$router.push({ name: 'Signin' })
-    }
+    },
+    getSearch: function () {
+      // const params = {
+      //   q: this.inputText
+      //   }
+
+      axios({
+        method: 'get',
+        // url: `http://127.0.0.1:8000/movies/search`,
+        url: `https://api.themoviedb.org/3/search/movie?api_key=1850c79236f1a6c5846dc306a959dc25&language=ko-KR&query=${this.inputText}&page=1&include_adult=false`,
+        // params
+        // headers: this.setToken()
+      })
+        .then((response) => {
+          this.results = response.data
+          // console.log(response)
+          // console.log(response.data)
+          this.$router.push({ name: 'Search' })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }    
   },
   created: function () {
     const token = localStorage.getItem('jwt')
@@ -92,7 +129,7 @@ export default {
   color: blue;
 }
 .bg {
-  min-height: 100vh;
+  min-height: 120vh;
   background-image: url("https://i.ibb.co/5hrws9R/1330852.jpg");
   background-repeat: repeat;
 }
@@ -101,4 +138,26 @@ export default {
   background-color:black;
 }
 
+.box1 {
+  /* border: 2px solid red; */
+  float: left;
+}
+
+.box2 {
+  /* border:5px solid yellow; */
+  float: right;
+  
+}
+
+.box3 {
+  border: 3px solid black;
+}
+
+.mm {
+  margin-left: auto;
+}
+.my-sm-0 {
+  position: relative;
+  /* margin-top: -60px; */
+}
 </style>

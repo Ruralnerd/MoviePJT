@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Review, Comment
 
 class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField()
 
     class Meta:
         model = Comment
@@ -11,10 +12,11 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ReviewListSerializer(serializers.ModelSerializer):
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
+    username = serializers.ReadOnlyField()
 
     class Meta:
         model = Review
-        fields = ('id', 'title', 'created_at', 'movie_title', 'content', 'comment_count')
+        fields = ('id', 'title', 'username', 'created_at', 'movie_title', 'content', 'comment_count')
 
 
 class ReviewSerializer(serializers.ModelSerializer):

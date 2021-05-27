@@ -12,7 +12,7 @@ export default new Vuex.Store({
     mymovies:[],
     removies:[],
     savemovietitles:null,
-    savemovies: null,
+    savemovies: [1],
     latestmovies: null,
     popularmovies: null,
     todaymovies: null,

@@ -1,15 +1,15 @@
 <template>
-  <div class="container col-sm-6 mt-5" style="">
+  <div class="container col-sm-6 mt-5 bg-gray" style="">
     <div class="d-flex flex-column justify-content-start">
-      <p class="text-start">제목 : {{ detail.title }}</p>
-      <p class="text-start">영화 : {{ detail.movie_title }}</p>
-      <p class="text-start">{{ detail.content }}</p>
-      <div class="d-flex justify-content-end">
+      <p class="text-start ms-5 me-5">제목 : {{ detail.title }}</p>
+      <p class="text-start ms-5 me-5">영화 : {{ detail.movie_title }}</p>
+      <p class="text-start ms-5 me-5">{{ detail.content }}</p>
+      <div class="d-flex justify-content-end  me-5">
         <button type="button" class="" @click="goUpdate">수정</button>
         <button type="button" class="ms-1" @click="deleteDetail">삭제</button>
       </div>
       <hr>
-      <p class="text-start">댓글</p>
+      <p class="text-start ms-5">댓글</p>
       <Comment
         v-for="(comment, idx) in comments"
         :key="idx"
@@ -18,8 +18,8 @@
         @deleteComment="deleteComment"
       />
       <!-- <Comment :detail="detail"/> -->
-      <div class="p-1">
-        <textarea class="form-control" placeholder="댓글" id="floatingContent" v-model="content" style="" @keyup.enter="createComment"></textarea>
+      <div class="p-1 ms-5 me-5">
+        <textarea class="form-control" placeholder="댓글" id="floatingContent" v-model="content" maxlength="300" style="height:30px;max-height:30px;" @keyup.enter="createComment"></textarea>
       </div>
     </div>
   </div>
@@ -153,6 +153,11 @@ export default {
   
   .bgc {
     background-color:blue
+  }
+
+  .bg-gray {
+    background-color: gray;
+    /* opacity: 0.3; */
   }
 
 </style>

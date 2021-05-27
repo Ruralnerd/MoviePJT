@@ -1,21 +1,23 @@
 <template>
   <div>
-    <div class="container col-sm-6">
-      <div class="p-1 mt-5">
-        <textarea class="form-control" placeholder="제목" id="floatingTitle" v-model="title" style="height:15px"></textarea>
-        <!-- <label for="floatingTextarea">제목</label> -->
+    <div class="container col-sm-6 mt-4 px-5">
+      <h1 class="text-start px-3">글쓰기</h1>
+      <div class="input-group mb-3 p-3">
+        <span class="input-group-text">제목</span>
+        <input type="text" class="form-control" placeholder="제목을 입력하세요." v-model="title" maxlength="31" aria-label="title">
         <br>
       </div>   
-      <div class="p-1">
-        <textarea class="form-control" placeholder="영화 제목" id="floatingMovieTitle" v-model="movie_title" style="height:15px"></textarea>
+      <div class="input-group mb-3 px-3">
+        <span class="input-group-text">영화</span>
+        <input type="text" class="form-control" placeholder="영화 제목을 입력하세요." v-model="movie_title" maxlength="31" aria-label="movie_title">
         <br>
-      </div>
+      </div>   
       <!-- 얘는 본문임 -->
-      <div class="p-1">
-        <textarea class="form-control" placeholder="본문" id="floatingContent" v-model="content" style="height:150px"></textarea>
+      <div class="p-3">
+        <textarea class="form-control" placeholder="" id="floatingContent" v-model="content" maxlength="279" style="height:150px"></textarea>
       </div>
       <br>
-      <div class="d-flex flex-row-reverse">
+      <div class="d-flex flex-row-reverse px-3">
         <button type="button" @click="createArticle" class="">작성</button>
       </div>
     </div>

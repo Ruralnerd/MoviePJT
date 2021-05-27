@@ -108,9 +108,10 @@ def rates_detail(request, rate_pk):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 def search(request):
-    search_movie = request.GET.get('search')
+    search_movie = request.GET.get('q')
     if search_movie:
-        # movies = Movie.objects.filter(Q(title__icontains=search_movie))
-        movies = Movie.objects.filter(Q(title__icontains=search_movie) & Q(original_title__icontains=search_movie) & Q(overview__icontains=search_movie))
-        search_movies = serializers.serialize('json', movies)
-        return HttpResponse(search_movies, content_type='application/json')
+        movies = Movie.objects.filter(Q(title__icontains=search_movie) | Q(original_title__icontains=search_movie))
+        searchsomething = serializers.serialize('json', movies)
+        return HttpResponse(searchsomething, content_type='application/json')
+    else:
+        return JsonResponse({'error': '검색어를 입력해주세요'})

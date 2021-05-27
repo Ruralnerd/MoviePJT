@@ -13,5 +13,5 @@ urlpatterns = [
     path('recommend/genre_movies/', views.genre_movies, name='genre_movies'),
     path('movie_list/<int:movie_pk>/rates/', views.rates_list, name='rates_list'),
     path('rates/<int:rate_pk>/', views.rates_detail, name='rates_detail'),
-    path('search/<str:search_movie>/', views.search, name='search'),
+    path('search/', views.search, name='search'),
 ]

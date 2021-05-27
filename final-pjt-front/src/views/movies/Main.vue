@@ -110,12 +110,10 @@ export default {
     }
   },
   created: function () {
-    if (this.$store.state.movies.length) {
-      this.$store.dispatch('getMovies')
-      this.$store.dispatch('getLatest')
-      this.$store.dispatch('getPopular')
-      this.$store.dispatch('getToday')
-    }
+    this.$store.dispatch('getMovies')
+    this.$store.dispatch('getLatest')
+    this.$store.dispatch('getPopular')
+    this.$store.dispatch('getToday')
   },
   computed: {
     // movies: function () {

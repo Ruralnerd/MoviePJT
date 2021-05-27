@@ -1,9 +1,13 @@
 <template>
-  <div class="d-flex">
-    <p class="text-start">{{ comment.content }} {{comment.created_at}}</p>
-    <div class="d-flex justify-content-end align-items-start">
-      <button type="button" class="ms-2" @click="deleteComment" style="">삭제</button>
+  <div class='box5 ms-5 me-5 mb-2 bg-cus'>
+    <div class="d-flex align-items-start user-box m">
+      <p>{{comment.username}}</p><p class="p-pos mt-1" style="font-size:12px">{{comment.created_at}}</p>
+        <button type="button" class="del-btn" @click="deleteComment" style="">X</button>
     </div>
+      <div class="d-flex align-items-start">
+        <p class="text-start">{{ comment.content }}</p>
+      </div>
+    
   </div>
 </template>
 
@@ -65,5 +69,25 @@ export default {
 </script>
 
 <style>
+  .p-pos {
+    position: absolute;
+    margin-left: 80px;
+  }
 
+  .bg-cus {
+    background-color: skyblue;
+  }
+
+  .del-btn {
+    position: relative;
+    margin-left: 140px;
+    height: 25px;
+    padding-left: 3px;
+    padding-top: 0px;
+    padding-right: 3px;
+  }
+
+  .user-box {
+    height: 35px;
+  }
 </style>

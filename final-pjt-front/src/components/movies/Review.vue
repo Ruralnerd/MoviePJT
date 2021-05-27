@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <p>{{ review.star }}점  {{ review.opinion }}<button type="button" class="ms-2" style="" @click="deleteReview">x</button></p>
+  <div class='d-flex flex-column review-lh'>
+    <p class="">{{ review.username }}</p><p class="ca-pos">{{review.created_at}}</p>
+    <p class="ovfl">{{ review.star }}점  {{ review.opinion }}</p><div class='as'><button type="button" class="ms-2" style="" @click="deleteReview">x</button></div>
   </div>
 </template>
 
@@ -42,5 +43,34 @@ export default {
 </script>
 
 <style>
+
+  .ovfl {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* display: -webkit-box; */
+    white-space: nowrap;
+    /* -webkit-line-clamp: 16;    라인수 */
+    /* -webkit-box-orient: vertical; */
+    /* word-wrap:break-word; */
+    /* line-height: 1.8rem; */
+    height: 50;
+    width:200px;
+  }
+
+  .as {
+    position: absolute;
+    margin-top: 28px;
+    margin-left: 200px;
+  }
+
+  .review-lh {
+    line-height: 15px;
+  }
+
+  .ca-pos {
+    position: absolute;
+    margin-left: 80px;
+    font-size: 12px;
+  }
 
 </style>

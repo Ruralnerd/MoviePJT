@@ -1,6 +1,6 @@
 <template>
   <div class="">
-      <div class="carousel-item p-0 img_wrap" style="background-color: rgba( 255, 255, 255, 0.5 );">
+      <div class="carousel-item p-0 img_wrap" style="">
         <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" class="image-fluid hv" style="height:700px; width:500px" alt="..." @click="[saveId(), modalShow=!modalShow]">
         <div class="container d-flex flex-column">
           <p class="overview">개봉일 {{ movie.release_date }}</p>
@@ -8,21 +8,20 @@
           <p class="overview">{{ movie.title }}</p>
         </div>
       </div>
-    <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=savemovies.title class="">
-      <div class="d-flex box3">
-        <div class="img_wrap1 hv-1 box4">
-          <img :src="'https://image.tmdb.org/t/p/w400/'+ savemovies.poster_path" alt="" class="hv1">
-          <p class="overview1" style="width:400px">{{ savemovies.overview }}</p>
+    <b-modal id="modal-lg" size="lg" v-model="modalShow" :title=movie.title class="">
+      <div class="d-flex">
+        <div class="img_wrap1 hv-1">
+          <img :src="'https://image.tmdb.org/t/p/w400/'+ movie.poster_path" alt="" class="hv1">
+          <p class="overview1" style="width:400px">{{ movie.overview }}</p>
         </div>
         <div class='ms-4' style="flex:1;">
-          <!-- 왼쪽이 데이터 오른쪽이 이름 -->
           <ReviewList
             :savemovies="savemovies"
           />
         </div>
       </div>
     </b-modal>
-
+  <!-- 왼쪽이 데이터 오른쪽이 이름 -->
   </div>
 </template>
 
@@ -42,7 +41,7 @@ export default {
   },
   props: {
     movie: {
-      type: Object,
+      type: Object
     },
   },
   methods: {
@@ -72,14 +71,6 @@ export default {
 </script>
 
 <style>
-  .box3 {
-    border: 5px solid red;
-  }
-  .box4 {
-    border: 5px solid blue;
-  }
-
-
   .pos {
     margin-left: 210px;
     margin-bottom: 100px;

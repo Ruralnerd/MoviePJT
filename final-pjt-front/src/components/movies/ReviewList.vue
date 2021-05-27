@@ -1,7 +1,7 @@
 <template>
-  <div class="container box1" style="">
-    <div class="d-flex flex-column box2">
-    <h1>리뷰 페이지</h1>
+  <div class="container" style="">
+    <div class="d-flex flex-column">
+    <h1 class="text-center">리뷰 페이지</h1>
       <ul>
         <Review
           v-for="(review, idx) in reviews"
@@ -11,7 +11,7 @@
         />
       </ul>
       <div class="p-1 d-flex align-items-end flex-column">
-        <star-rating v-model="star" :star-size="20" :increment="0.5" :show-rating=false></star-rating>
+        <star-rating v-model="star" :star-size="20" :increment="0.5" :show-rating=false class="aa"></star-rating>
         <textarea class="form-control mt-1" placeholder="리뷰" id="floatingReview" v-model="opinion" style="" @keyup.enter="createReview"></textarea>
     </div>
     </div>    
@@ -82,6 +82,7 @@ export default {
             this.getReviews()
             this.opinion = null
             this.star = null
+            console.log(this.savemovies.genre_ids)
           })
           .catch((error) => {
             console.log(error)
@@ -110,11 +111,5 @@ export default {
 </script>
 
 <style>
-  .box1 {
-    border: 5px solid skyblue;
-  }
-  .box2 {
-    border: 5px solid yellow;
-  }
 
 </style>
