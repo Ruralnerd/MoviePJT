@@ -1,5 +1,5 @@
 <template>
-  <div class="card img_wrap mh" style="width: 100%;">
+  <div class="card img_wrap mh" style="width: 100%;" v-if='latestmovie'>
     <img :src="'https://image.tmdb.org/t/p/w400/' + latestmovie['fields']['poster_path']" class="card-img-top hv" alt="...">
     <div class="card-body bg-primary container d-flex flex-column pb-5" style="max-height:500px">
       <p class="card-text overvie">{{latestmovie['fields']['title'] }}</p>

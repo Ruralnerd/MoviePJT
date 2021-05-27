@@ -7,7 +7,7 @@
         style="height:15px;"
         @keyup.enter="check"
       ></textarea>
-      <h3>{{ video }}</h3>
+      <!-- <h3>{{ video }}</h3> -->
       <iframe width="100%" height="600px" :src="'https://www.youtube.com/embed/'+ video" frameborder="0"></iframe>
   </div>
 </template>
@@ -51,8 +51,7 @@ export default {
       })
         .then(res => {
           this.inputText = ''
-          // this.video = res.data.items[0].id['videoId']
-          this.video = res.data
+          this.video = res.data.items[0].id['videoId']
         })
         .catch(err => console.log(err))
     },

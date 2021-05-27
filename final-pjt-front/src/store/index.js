@@ -47,6 +47,11 @@ export default new Vuex.Store({
       commit('SAVE_ID', movie)
     },
     getMovies: function({ commit }) {
+      const ck = localStorage.getItem('vuex')
+      // console.log(JSON.parse(ck))
+      if (ck) {
+        commit('GET_MOVIES', JSON.parse(ck).movies)
+      } else {
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/movies/movie_list/'
@@ -55,8 +60,13 @@ export default new Vuex.Store({
           console.log(response)
           commit('GET_MOVIES', response.data)
         })
+      }
     },
     getLatest: function({ commit }) {
+      const ck = localStorage.getItem('vuex')
+      if (ck) {
+        commit('GET_LATEST', JSON.parse(ck).latestmovies)
+      } else {
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/movies/recommend/latest_movies/'
@@ -65,8 +75,13 @@ export default new Vuex.Store({
           console.log(response)
           commit('GET_LATEST', response.data)
         })
+      }
     },
     getPopular: function({ commit }) {
+      const ck = localStorage.getItem('vuex')
+      if (ck) {
+        commit('GET_POPULAR', JSON.parse(ck).popularmovies)
+      } else {
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/movies/recommend/popular_movies/'
@@ -75,8 +90,13 @@ export default new Vuex.Store({
           console.log(response)
           commit('GET_POPULAR', response.data)
         })
+      }
     },
     getToday: function({ commit }) {
+      const ck = localStorage.getItem('vuex')
+      if (ck) {
+        commit('GET_TODAY', JSON.parse(ck).todaymovies)
+      } else {
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/movies/recommend/today_movies/'
@@ -85,6 +105,7 @@ export default new Vuex.Store({
           console.log(response)
           commit('GET_TODAY', response.data)
         })
+      }
     },
   },
   getter: {
