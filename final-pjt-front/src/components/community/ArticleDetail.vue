@@ -1,10 +1,14 @@
 <template>
-  <div class="container col-sm-6 mt-5 bg-gray" style="">
-    <div class="d-flex flex-column justify-content-start">
-      <p class="text-start ms-5 me-5">제목 : {{ detail.title }}</p>
-      <p class="text-start ms-5 me-5">영화 : {{ detail.movie_title }}</p>
-      <p class="text-start ms-5 me-5">{{ detail.content }}</p>
-      <div class="d-flex justify-content-end  me-5">
+  <div class="container col-sm-5 mt-5 bg-gray" style="">
+    <div class="d-flex flex-column justify-content-start pt-4">
+      <p class="text-start ms-5 me-5" style="font-size:20px">제목 : {{ detail.title }}</p>
+      <p class="text-start ms-5 me-5" style="font-size:18px">영화 : {{ detail.movie_title }}</p>
+      <p class="text-start ms-5 me-5" style="font-size:16px">{{ detail.content }}</p>
+      <div class="d-flex flex-column justify-content-end align-items-end me-5" style="line-height:0.8rem">
+        <p>생성 시각 : {{detail.created_at}}</p>
+        <p>수정 시각 : {{detail.updated_at}}</p>
+      </div>
+      <div class="d-flex justify-content-end me-5">
         <button type="button" class="" @click="goUpdate">수정</button>
         <button type="button" class="ms-1" @click="deleteDetail">삭제</button>
       </div>
@@ -18,7 +22,7 @@
         @deleteComment="deleteComment"
       />
       <!-- <Comment :detail="detail"/> -->
-      <div class="p-1 ms-5 me-5">
+      <div class="p-1 ms-5 me-5 mb-5">
         <textarea class="form-control" placeholder="댓글" id="floatingContent" v-model="content" maxlength="300" style="height:30px;max-height:30px;" @keyup.enter="createComment"></textarea>
       </div>
     </div>

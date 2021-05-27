@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container col-sm-6 mt-4 px-5">
+    <div class="container col-sm-5 mt-4 px-5">
       <h1 class="text-start px-3">글쓰기</h1>
       <div class="input-group mb-3 p-3">
         <span class="input-group-text">제목</span>
