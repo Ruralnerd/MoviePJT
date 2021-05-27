@@ -1,7 +1,7 @@
 <template>
   <div class='d-flex flex-column review-lh'>
     <p class="" style="color:skyblue">{{ review.username }}</p><p class="ca-pos" style>{{review.created_at}}</p>
-    <p class="ovfl boxjam star-pos" style="color:yellow">{{ review.star }}점</p><p class="boxjam ms-4">{{ review.opinion }}</p><div class='as boxjam'><button v-if='myinfo.username===review.username' type="button" class="ms-2" style="" @click="deleteReview">x</button></div>
+    <p class="ovfl boxjam star-pos" style="color:yellow">{{ review.star }}점</p><p class="ms-4">{{ review.opinion }}<button v-if='myinfo.username===review.username' type="button" class="ms-2" style="" @click="deleteReview">x</button></p>
   </div>
 </template>
 
@@ -74,14 +74,18 @@ export default {
 
   .ca-pos {
     position: absolute;
-    margin-left: 80px;
+    margin-left: 120px;
     font-size: 12px;
   }
 
   .star-pos {
   position: absolute;
   font-size: 12px;  
-  margin-top: 30px;
+  margin-top: 35px;
+  }
+  .boxjam {
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
 </style>

@@ -46,11 +46,17 @@ export default new Vuex.Store({
     },
     INFO_SAVE: function(state, info) {
       state.myinfo = info
+    },
+    INFO_DELETE: function(state) {
+      state.myinfo.pop()
     }
   },
   actions: {
     saveMovie: function({ commit }, movie) {
       commit('SAVE_MOVIE', movie)
+    },
+    infoDelete: function({ commit }) {
+      commit('INFO_DELETE')
     },
     saveId: function({ commit }, movie) {
       commit('SAVE_ID', movie)

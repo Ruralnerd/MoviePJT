@@ -26,7 +26,8 @@
 
                 <b-nav-item-dropdown right>
                   <template #button-content>
-                    <span class="p-2 px-4">회원</span>
+                    <span v-if="myinfo.username" class="p-2 px-4">{{myinfo.username}}</span>
+                    <span v-else class="p-2 px-4">계정</span>
                   </template>
                   <span v-if="isSignin"><b-dropdown-item class="text-decoration-none" @click.native="signout">로그-아웃</b-dropdown-item></span>
                   <span v-else>
@@ -63,6 +64,7 @@
 <script>
 import axios from 'axios'
 import Search from '@/views/movies/Search.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',
@@ -77,10 +79,17 @@ export default {
       inputText: null,
     }
   },
+  computed: {
+    ...mapState([
+      'myinfo',
+    ])
+  },
   methods: {
     signout: function () {
       this.isSignin = false
       localStorage.removeItem('jwt')
+      // this.$store.dispatch('infodelete')
+      this.myinfo.username = null
       this.$router.push({ name: 'Signin' })
     },
     backback: function () {
