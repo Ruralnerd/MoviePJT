@@ -2,10 +2,10 @@
   <div class="bg">
     <div class="">
       <div id="app" class="">
-        <div id="nav" class="">
+        <div id="nav" class="" v-if='$route.name !== "Cover"'>
           <b-navbar type="light" variant="" style="background-color:#4B0082">
             <b-navbar-nav>
-              <router-link :to="{ name: 'Main' }" class="text-decoration-none p-2 px-4">메인</router-link>
+              <router-link v-if="isSignin" :to="{ name: 'Main' }" class="text-decoration-none p-2 px-4">메인</router-link>
               <router-link v-if="isSignin" :to="{ name: 'RecommendedMovieList' }" class="text-decoration-none p-2 px-4">추천영화</router-link>
               <router-link v-if="isSignin" :to="{ name: 'YoutubeSearch' }" class="text-decoration-none p-2 px-4">최신기술</router-link>
               <router-link v-if="isSignin" :to="{ name: 'Community' }" class="text-decoration-none p-2 px-4">게시판</router-link>
@@ -14,10 +14,10 @@
             <!-- <div class='box1 mm'> -->
               <b-navbar-nav class="mm">
                 <b-nav-form class="d-flex align-items-center">
-                  <div class="box1">
+                  <div class="search-input" v-if="isSignin">
                     <b-form-input size="sm" class="mr-sm-2" placeholder="Search" v-model="inputText" @keydown.enter.prevent="getSearch"></b-form-input>
                   </div>
-                  <div class="box2">
+                  <div class="search-button" v-if="isSignin">
                     <button size="sm" class="my-2 my-sm-0 ms-1" type="button" @click="getSearch">Search</button>
                   </div>
                 </b-nav-form>
@@ -126,7 +126,8 @@ export default {
 }
 
 #nav {
-  padding-top: 30px;
+  /* padding-top: 30px; */
+  /* position: sticky; */
 }
 
 #nav a {
@@ -148,19 +149,15 @@ export default {
   background-color:black;
 }
 
-.box1 {
+.search-input {
   /* border: 2px solid red; */
   float: left;
 }
 
-.box2 {
+.search-button {
   /* border:5px solid yellow; */
   float: right;
   
-}
-
-.box3 {
-  border: 3px solid black;
 }
 
 .mm {

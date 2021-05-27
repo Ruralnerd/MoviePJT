@@ -2,7 +2,7 @@
   <div class="container col-sm-8 mt-5" style="">
     <div class="d-flex box3">
       <h1>자유 게시판</h1>
-      <router-link :to="{ name: 'ArticleForm' }" class="text-decoration-none d-flex flex-column justify-content-center box3"><button type="button">글쓰기</button></router-link>
+      <router-link :to="{ name: 'ArticleForm' }" class="text-decoration-none d-flex flex-column justify-content-center"><button type="button">글쓰기</button></router-link>
     </div>
     <table class="table table-dark table-hover">
       <thead>

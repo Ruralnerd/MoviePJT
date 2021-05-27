@@ -1,6 +1,6 @@
 <template>
-  <div class='box5 ms-5 me-5 mb-2 bg-cus'>
-    <div class="d-flex align-items-start user-box m">
+  <div class='ms-5 me-5 mb-2 bg-cus'>
+    <div class="d-flex align-items-start user-box">
       <p>{{comment.username}}</p><p class="p-pos mt-1" style="font-size:12px">{{comment.created_at}}</p>
         <button type="button" class="del-btn" @click="deleteComment" style="">X</button>
     </div>

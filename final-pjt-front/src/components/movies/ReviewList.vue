@@ -84,10 +84,13 @@ export default {
           .then((response) => {
             this.reviews = response.data
             this.getReviews()
+            if (this.star*2 >= 7) {
+              this.$store.dispatch('rmovie', this.movie)
+            }
             this.opinion = null
             this.star = null
             // console.log(this.savemovies.genre_ids)
-            this.$store.dispatch('rmovie', this.movie)
+            
           })
           .catch((error) => {
             console.log(error)

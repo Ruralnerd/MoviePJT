@@ -37,7 +37,6 @@ export default {
   methods: {
     signin: function () {
       axios({
-        
         method: 'post',
         url: 'http://127.0.0.1:8000/accounts/api-token-auth/',
         data: this.credentials
@@ -58,10 +57,6 @@ export default {
 </script>
 
 <style>
-.box {
-  border: 2px solid black;
-  border-radius: 5px;
-}
 
 .bg1 {
   background-color:	#0000CD ;
