@@ -46,9 +46,6 @@ export default {
     },
   },
   methods: {
-    check() {
-      console.log(this.savetitle)
-    },
     saveMovie: function () {
       const smovie = this.movie
       this.$store.dispatch('saveMovie', smovie)

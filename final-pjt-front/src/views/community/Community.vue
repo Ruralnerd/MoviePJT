@@ -1,6 +1,6 @@
 <template>
   <div class="container col-sm-8 mt-5" style="">
-    <div class="d-flex box3">
+    <div class="d-flex justify-content-between ">
       <h1>자유 게시판</h1>
       <router-link :to="{ name: 'ArticleForm' }" class="text-decoration-none d-flex flex-column justify-content-center"><button type="button">글쓰기</button></router-link>
     </div>
@@ -20,7 +20,7 @@
             :article="article"
           />
       </tbody>
-    </table>    
+    </table>
   </div>
 </template>
 
@@ -58,16 +58,13 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-
+    },
+    check:function () {
+      console.log(this.myinfo)
     }
   },
-  // 페이지가 열리자마자 글을 가져오게하자
   created: function () {
-    // if (localStorage.getItem('jwt')) {
     this.getArticles()
-    // } else {
-      // this.$router.push({name: 'Login'})
-    // }
   }
 }
 </script>
@@ -76,5 +73,4 @@ export default {
   h1 {
     color:yellow
   }
-
 </style>

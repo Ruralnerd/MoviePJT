@@ -1,10 +1,10 @@
 <template>
-  <div class="container col-sm-8 mt-5 bg-light">
+  <div class="container col-sm-8 mt-5 bg-light pt-3" style="border: 3px solid black; border-radius: 5px;">
       <textarea
         class="form-control mb-5"
         placeholder="검색어를 입력해 주세요."
         id="floatingTitle" v-model="inputText"
-        style="height:15px;"
+        style="height:10px;"
         @keyup.enter="check"
       ></textarea>
       <!-- <h3>{{ video }}</h3> -->

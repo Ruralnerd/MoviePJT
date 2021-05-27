@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <h1>Recommended Movie List</h1>
-    <div class="row row-cols-3 row-cols-md-3 g-3">
+  <div class="container my-5">
+    <h1>당신을 위한 추천 영화</h1>
+    <div class="row row-cols-3 row-cols-md-3 g-3 mt-3">
       <RecommendedMovie
         v-for="(recommend, idx) in recommends"
         :key="idx"

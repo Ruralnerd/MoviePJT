@@ -1,14 +1,14 @@
 <template>
-  <div class="container col-sm-5 mt-5 bg-gray" style="">
+  <div class="container col-sm-5 mt-5 bg-gray" style="opacity:0.9">
     <div class="d-flex flex-column justify-content-start pt-4">
       <p class="text-start ms-5 me-5" style="font-size:20px">제목 : {{ detail.title }}</p>
       <p class="text-start ms-5 me-5" style="font-size:18px">영화 : {{ detail.movie_title }}</p>
       <p class="text-start ms-5 me-5" style="font-size:16px">{{ detail.content }}</p>
-      <div class="d-flex flex-column justify-content-end align-items-end me-5" style="line-height:0.8rem">
+      <div class="d-flex flex-column justify-content-end align-items-end me-5" style="line-height:0.8rem; margin-top:100px">
         <p>생성 시각 : {{detail.created_at}}</p>
         <p>수정 시각 : {{detail.updated_at}}</p>
       </div>
-      <div class="d-flex justify-content-end me-5">
+      <div class="d-flex justify-content-end me-5" v-if='detail.username === myinfo.username'>
         <button type="button" class="" @click="goUpdate">수정</button>
         <button type="button" class="ms-1" @click="deleteDetail">삭제</button>
       </div>
@@ -31,6 +31,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import Comment from '@/components/community/Comment.vue'
 
 
@@ -46,6 +47,11 @@ export default {
       content:null,
     }
   },
+  computed: {
+    ...mapState([
+      'myinfo',
+    ])
+  },  
   props: {
     id: {
       type:[Number, String],
@@ -142,6 +148,7 @@ export default {
     },
     check () {
       console.log(this.detail)
+      console.log(this.myinfo)
     }
   },
   created: function () {
@@ -162,7 +169,7 @@ export default {
 
   .bg-gray {
     background-color: gray;
-    /* opacity: 0.3; */
+    border: 1px solid black;
+    border-radius: 5px;
   }
-
 </style>

@@ -97,7 +97,6 @@ export default {
           })
     },
     deleteReview: function (reviewId) {
-      console.log(reviewId)
       axios({
         method: 'delete',
         url: `http://127.0.0.1:8000/movies/rates/${reviewId}/`,

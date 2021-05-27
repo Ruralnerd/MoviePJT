@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container col-sm-5 mt-4 px-5">
-      <h1 class="text-start px-3">글쓰기</h1>
+    <div class="container col-sm-5 mt-5 px-5 bg-gray pb-5">
+      <h1 class="text-start px-3 pt-3">수정하기</h1>
       <div class="input-group mb-3 p-3">
         <span class="input-group-text">제목</span>
         <input type="text" class="form-control" :placeholder=updatearticle.title v-model="updatetitle" maxlength="31" aria-label="title">

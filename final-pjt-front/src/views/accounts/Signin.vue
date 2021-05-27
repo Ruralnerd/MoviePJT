@@ -46,6 +46,7 @@ export default {
           console.log(response)
           localStorage.setItem('jwt', response.data.token)
           this.$router.push({ name: 'Main' })
+          this.$store.dispatch('infosave', this.credentials)
         })
         .catch(error => {
             console.log(error)

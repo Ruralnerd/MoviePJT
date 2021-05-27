@@ -1,18 +1,19 @@
 <template>
-  <div class='ms-5 me-5 mb-2 bg-cus'>
-    <div class="d-flex align-items-start user-box">
-      <p>{{comment.username}}</p><p class="p-pos mt-1" style="font-size:12px">{{comment.created_at}}</p>
-        <button type="button" class="del-btn" @click="deleteComment" style="">X</button>
+  <div class='mx-5 bg-cus'>
+    <div class="d-flex user-box">
+      <p class="">{{comment.username}}        {{comment.created_at}}
+      <button type="button" class="del-btn" @click="deleteComment" style="" v-if='comment.username === myinfo.username'>X</button></p>
     </div>
       <div class="d-flex align-items-start">
-        <p class="text-start">{{ comment.content }}</p>
+        <p class="text-start mb-0">{{ comment.content }}</p>
       </div>
-    
+  <hr>    
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Comment',
@@ -22,6 +23,11 @@ export default {
     comment: {
       type: [Object,Number,String]
     },
+  },
+  computed: {
+    ...mapState([
+      'myinfo',
+    ])
   },
   methods: {
     setToken: function () {
@@ -75,16 +81,17 @@ export default {
   }
 
   .bg-cus {
-    background-color: skyblue;
+    padding:0px
   }
 
   .del-btn {
     position: relative;
-    margin-left: 140px;
+    /* margin-left: 180px; */
     height: 25px;
     padding-left: 3px;
-    padding-top: 0px;
+    padding-top: -2px;
     padding-right: 3px;
+    /* border: 1px solid black; */
   }
 
   .user-box {
