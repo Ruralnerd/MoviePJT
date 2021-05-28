@@ -1,6 +1,6 @@
 <template>
   <div class='d-flex flex-column review-lh'>
-    <p class="" style="color:skyblue">{{ review.username }}</p><p class="ca-pos" style>{{review.created_at}}</p>
+    <p :class="{fc : isActive}" style="">{{ review.username }}</p><p class="ca-pos" style>{{review.created_at}}</p>
     <p class="ovfl boxjam star-pos" style="color:yellow">{{ review.star }}점</p><p class="ms-4">{{ review.opinion }}<button v-if='myinfo.username===review.username' type="button" class="ms-2" style="" @click="deleteReview">x</button></p>
   </div>
 </template>
@@ -11,12 +11,19 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Review',
+  data() {
+    return {
+    }
+  },
   props: {
     review: {
       type:[Object,Number,String]
     }
   },
   computed: {
+    isActive: function () {
+      return this.myinfo.username === this.review.username
+    },
     ...mapState([
       'myinfo',
     ])
@@ -81,11 +88,14 @@ export default {
   .star-pos {
   position: absolute;
   font-size: 12px;  
-  margin-top: 35px;
+  margin-top: 34px;
   }
   .boxjam {
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  .fc {
+    color: skyblue;
   }
 
 </style>

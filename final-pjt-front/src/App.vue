@@ -163,7 +163,7 @@ export default {
   color: blue;
 }
 .bg {
-  min-height: 120vh;
+  min-height: 115vh;
   background-image: url("https://i.ibb.co/5hrws9R/1330852.jpg");
   background-repeat: repeat;
 }
